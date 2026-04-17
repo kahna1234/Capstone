@@ -1,0 +1,105 @@
+package com.dev.ecommerce.orderservice.services;
+
+import com.dev.ecommerce.orderservice.clients.KafkaProducerClient;
+import com.dev.ecommerce.orderservice.dtos.OrderDto;
+import com.dev.ecommerce.orderservice.dtos.OrderItemDto;
+import com.dev.ecommerce.orderservice.entities.Order;
+import com.dev.ecommerce.orderservice.entities.OrderItem;
+import com.dev.ecommerce.orderservice.repositories.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class OrderService implements OrderServiceInterface {
+
+    @Autowired
+    private KafkaProducerClient kafkaProducerClient;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    public OrderDto createOrder(OrderDto orderDto) {
+        // Validate order (e.g., check product availability via ProductCatalogService)
+        // Process payment via PaymentService
+
+        // Convert DTO to Entity
+        Order order = new Order();
+        order.setUserId(orderDto.getUserId());
+        order.setCustomerEmail(orderDto.getCustomerEmail());
+        order.setStatus(orderDto.getStatus());
+        order.setTotalAmount(orderDto.getTotalAmount());
+        List<OrderItem> items = orderDto.getItems().stream().map(dto -> {
+            OrderItem item = new OrderItem();
+            item.setProductId(dto.getProductId());
+            item.setQuantity(dto.getQuantity());
+            item.setPrice(dto.getPrice());
+            return item;
+        }).collect(Collectors.toList());
+        order.setItems(items);
+
+        // Save to database (Hibernate creates/updates tables)
+        Order savedOrder = orderRepository.save(order);
+
+        // Convert back to DTO
+        orderDto.setId(savedOrder.getId());
+
+        return orderDto;
+    }
+
+    public OrderDto getOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId).orElse(null);
+        if (order == null) return null;
+
+        OrderDto dto = new OrderDto();
+        dto.setId(order.getId());
+        dto.setUserId(order.getUserId());
+        dto.setCustomerEmail(order.getCustomerEmail());
+        dto.setStatus(order.getStatus());
+        dto.setTotalAmount(order.getTotalAmount());
+        dto.setItems(order.getItems().stream().map(item -> {
+            OrderItemDto itemDto = new OrderItemDto();
+            itemDto.setProductId(item.getProductId());
+            itemDto.setQuantity(item.getQuantity());
+            itemDto.setPrice(item.getPrice());
+            return itemDto;
+        }).collect(Collectors.toList()));
+        return dto;
+    }
+
+    public List<OrderDto> getUserOrders(Long userId) {
+        List<Order> orders = orderRepository.findByUserId(userId);
+        return orders.stream().map(order -> {
+            OrderDto dto = new OrderDto();
+            dto.setId(order.getId());
+            dto.setUserId(order.getUserId());
+            dto.setCustomerEmail(order.getCustomerEmail());
+            dto.setStatus(order.getStatus());
+            dto.setTotalAmount(order.getTotalAmount());
+            dto.setItems(order.getItems().stream().map(item -> {
+                OrderItemDto itemDto = new OrderItemDto();
+                itemDto.setProductId(item.getProductId());
+                itemDto.setQuantity(item.getQuantity());
+                itemDto.setPrice(item.getPrice());
+                return itemDto;
+            }).collect(Collectors.toList()));
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+    public OrderDto updateOrderStatus(Long orderId, String status) {
+        Order order = orderRepository.findById(orderId).orElse(null);
+        if (order != null) {
+            order.setStatus(status);
+            orderRepository.save(order);
+            OrderDto updatedOrder = getOrder(orderId);
+            if ("CONFIRMED".equalsIgnoreCase(status)) {
+                kafkaProducerClient.sendOrderConfirmation(updatedOrder);
+            }
+            return updatedOrder;  // Return updated DTO
+        }
+        return null;
+    }
+}

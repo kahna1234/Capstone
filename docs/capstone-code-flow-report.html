@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Capstone E-Commerce Code Flow</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #1d2430;
+      background: #ffffff;
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 11.5pt;
+      line-height: 1.48;
+    }
+
+    h1, h2, h3 {
+      color: #101820;
+      line-height: 1.15;
+      margin: 0 0 10px;
+    }
+
+    h1 {
+      font-size: 28pt;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      border-bottom: 2px solid #2b6cb0;
+      font-size: 18pt;
+      margin-top: 26px;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      font-size: 14pt;
+      margin-top: 18px;
+    }
+
+    p {
+      margin: 0 0 9px;
+    }
+
+    ul {
+      margin: 6px 0 12px 20px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    code {
+      background: #f3f6f8;
+      border: 1px solid #dce3ea;
+      border-radius: 4px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 9.5pt;
+      padding: 1px 4px;
+    }
+
+    pre {
+      background: #f7f9fb;
+      border: 1px solid #d8e0e8;
+      border-radius: 6px;
+      color: #152033;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 9.3pt;
+      line-height: 1.35;
+      margin: 8px 0 14px;
+      overflow: hidden;
+      padding: 10px 12px;
+      white-space: pre-wrap;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 10px 0 16px;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #ccd6e0;
+      padding: 7px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eaf2fa;
+      color: #0f3557;
+      font-weight: 700;
+    }
+
+    .cover {
+      border-bottom: 4px solid #2b6cb0;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+    }
+
+    .subtitle {
+      color: #51606f;
+      font-size: 13pt;
+      margin-bottom: 14px;
+    }
+
+    .meta {
+      color: #56616f;
+      font-size: 10.5pt;
+    }
+
+    .callout {
+      background: #eef7f1;
+      border-left: 5px solid #2f855a;
+      border-radius: 6px;
+      margin: 12px 0 16px;
+      padding: 10px 12px;
+    }
+
+    .warning {
+      background: #fff7e6;
+      border-left-color: #b7791f;
+    }
+
+    .diagram {
+      background: #fbfcfe;
+      border: 1px solid #cfd9e3;
+      border-radius: 8px;
+      margin: 12px 0 18px;
+      padding: 12px;
+    }
+
+    .diagram-title {
+      color: #29445f;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .row {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 7px 0;
+    }
+
+    .box {
+      background: #ffffff;
+      border: 1.5px solid #7aa6cf;
+      border-radius: 6px;
+      min-width: 120px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .box.strong {
+      background: #e9f4ff;
+      border-color: #2b6cb0;
+      font-weight: 700;
+    }
+
+    .box.green {
+      background: #edf8f1;
+      border-color: #38a169;
+    }
+
+    .box.orange {
+      background: #fff8ea;
+      border-color: #d69e2e;
+    }
+
+    .arrow {
+      color: #425466;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .flow-list {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .flow-list li {
+      border-left: 3px solid #2b6cb0;
+      margin-bottom: 10px;
+      padding-left: 12px;
+    }
+
+    .flow-list li::before {
+      color: #2b6cb0;
+      content: counter(step) ". ";
+      counter-increment: step;
+      font-weight: 700;
+    }
+
+    .page-break {
+      break-before: page;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <h1>Capstone E-Commerce Code Flow</h1>
+    <p class="subtitle">Frontend and Backend Architecture, Service Interactions, Payment Webhook Flow, and Email/Kafka Flow</p>
+    <p class="meta">Workspace: <code>D:\Capstone</code></p>
+    <p class="meta">Local frontend: <code>http://localhost:3000</code></p>
+    <p class="meta">Local API Gateway: <code>http://localhost:8088</code></p>
+  </section>
+
+  <h2>1. Project Overview</h2>
+  <p>
+    This project is a microservices-based e-commerce system. The frontend is a static JavaScript application, while the backend is split into Spring Boot services. The frontend talks to the backend through API Gateway. The backend services register with Eureka Service Discovery, store data in MySQL, and use Kafka for asynchronous email messages.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Local Port</th>
+        <th>Responsibility</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Frontend</td><td>3000</td><td>User interface, routing, cart, checkout pages</td></tr>
+      <tr><td>API Gateway</td><td>8088</td><td>Single backend entry point for the frontend</td></tr>
+      <tr><td>Service Discovery</td><td>8761</td><td>Eureka registry for backend services</td></tr>
+      <tr><td>User Auth Service</td><td>8082</td><td>Signup, login, JWT/user workflows</td></tr>
+      <tr><td>Product Catalog Service</td><td>8084</td><td>Product listing, product detail, search</td></tr>
+      <tr><td>Order Service</td><td>8083</td><td>Order creation, lookup, status update</td></tr>
+      <tr><td>Payment Service</td><td>8085</td><td>Stripe checkout link and webhook handling</td></tr>
+      <tr><td>Email Service</td><td>8081</td><td>Consumes Kafka messages and sends email</td></tr>
+      <tr><td>Kafka</td><td>9092</td><td>Async messaging for signup and order emails</td></tr>
+      <tr><td>MySQL</td><td>3307 on host</td><td>Persistent storage for service databases</td></tr>
+    </tbody>
+  </table>
+
+  <div class="diagram">
+    <div class="diagram-title">High-Level Architecture</div>
+    <div class="row">
+      <div class="box strong">User Browser</div>
+      <div class="arrow">→</div>
+      <div class="box strong">Frontend<br>localhost:3000</div>
+      <div class="arrow">→</div>
+      <div class="box strong">API Gateway<br>localhost:8088</div>
+    </div>
+    <div class="row">
+      <div class="box">API Gateway</div>
+      <div class="arrow">routes to</div>
+      <div class="box green">Auth</div>
+      <div class="box green">Product</div>
+      <div class="box green">Order</div>
+      <div class="box green">Payment</div>
+    </div>
+    <div class="row">
+      <div class="box green">Auth / Product / Order</div>
+      <div class="arrow">→</div>
+      <div class="box orange">MySQL</div>
+      <div class="arrow">and</div>
+      <div class="box orange">Kafka</div>
+      <div class="arrow">→</div>
+      <div class="box green">Email Service</div>
+    </div>
+    <div class="row">
+      <div class="box green">Payment Service</div>
+      <div class="arrow">↔</div>
+      <div class="box orange">Stripe</div>
+      <div class="arrow">webhook via</div>
+      <div class="box strong">API Gateway</div>
+    </div>
+  </div>
+
+  <h2>2. Frontend Flow</h2>
+  <p>
+    The frontend app starts from <code>frontend/index.html</code>. It loads <code>js/app.js</code>, which handles hash-based routing. Routes such as <code>#/products</code>, <code>#/cart</code>, <code>#/checkout</code>, and <code>#/orders</code> render different pages.
+  </p>
+
+  <pre>index.html
+  → js/app.js
+  → route detection from URL hash
+  → page renderer
+  → API service modules
+  → http://localhost:8088/* through API Gateway</pre>
+
+  <table>
+    <thead>
+      <tr><th>Frontend File</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>frontend/js/config.js</code></td><td>Stores API Gateway URLs for auth, products, orders, payments, and search.</td></tr>
+      <tr><td><code>frontend/js/app.js</code></td><td>Bootstraps the app and routes by hash.</td></tr>
+      <tr><td><code>frontend/js/pages/products.js</code></td><td>Loads and renders product cards.</td></tr>
+      <tr><td><code>frontend/js/pages/cart.js</code></td><td>Reads local cart data and displays cart contents.</td></tr>
+      <tr><td><code>frontend/js/pages/checkout.js</code></td><td>Creates an order and starts Stripe payment.</td></tr>
+      <tr><td><code>frontend/js/api/*.js</code></td><td>Wraps backend calls to API Gateway.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Frontend API URLs</h3>
+  <pre>AUTH_SERVICE:    http://localhost:8088/auth
+PRODUCT_SERVICE: http://localhost:8088/products
+ORDER_SERVICE:   http://localhost:8088/orders
+PAYMENT_SERVICE: http://localhost:8088/api/payments
+SEARCH_SERVICE:  http://localhost:8088/search</pre>
+
+  <h2>3. API Gateway Flow</h2>
+  <p>
+    API Gateway is the public backend entry point. The frontend does not need to know the internal service ports. Gateway forwards incoming requests to services discovered through Eureka.
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Gateway Path</th><th>Target Service</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>/auth/**</code>, <code>/users/**</code></td><td>UserAuthService</td></tr>
+      <tr><td><code>/products/**</code>, <code>/search/**</code></td><td>ProductCatalogService</td></tr>
+      <tr><td><code>/orders/**</code></td><td>OrderService</td></tr>
+      <tr><td><code>/api/payments/**</code></td><td>PaymentService</td></tr>
+      <tr><td><code>/api/stripewebhook</code></td><td>PaymentService webhook controller</td></tr>
+      <tr><td><code>/email/**</code></td><td>EmailService</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    Locally, API Gateway runs at <code>http://localhost:8088</code>. In cloud deployment, Stripe and the frontend must use the deployed public API Gateway domain.
+  </div>
+
+  <h2 class="page-break">4. Signup And Welcome Email Flow</h2>
+  <ol class="flow-list">
+    <li>User fills the signup form on the frontend.</li>
+    <li>Frontend sends <code>POST /auth/signup</code> to API Gateway.</li>
+    <li>Gateway routes the request to UserAuthService.</li>
+    <li>UserAuthService creates the user.</li>
+    <li>UserAuthService publishes an email event to Kafka topic <code>Signup</code>.</li>
+    <li>EmailService consumes the Kafka message.</li>
+    <li>EmailService sends a welcome email through Gmail SMTP.</li>
+  </ol>
+
+  <pre>User Browser
+  → Frontend signup form
+  → API Gateway /auth/signup
+  → UserAuthService
+  → Kafka topic: Signup
+  → EmailService
+  → Gmail SMTP</pre>
+
+  <h2>5. Product Browsing Flow</h2>
+  <ol class="flow-list">
+    <li>User clicks the Products page.</li>
+    <li>Frontend calls <code>GET http://localhost:8088/products</code>.</li>
+    <li>API Gateway forwards to ProductCatalogService.</li>
+    <li>ProductCatalogService reads products from MySQL database <code>product_catalog_service</code>.</li>
+    <li>Product DTOs are returned to the frontend.</li>
+    <li>Frontend renders product cards.</li>
+  </ol>
+
+  <pre>Products Page
+  → ProductService.getAllProducts()
+  → GET /products
+  → ProductCatalogService
+  → MySQL product table
+  → JSON product list
+  → Product cards</pre>
+
+  <h2>6. Cart Flow</h2>
+  <p>
+    The cart is handled on the frontend using browser local storage. Adding to cart does not immediately call the backend. The backend becomes involved during checkout, when the cart is converted into an order request.
+  </p>
+
+  <pre>User clicks Add to Cart
+  → ProductCard component
+  → StorageService.addToCart()
+  → Browser localStorage
+  → Navbar cart count updates</pre>
+
+  <h2>7. Checkout And Stripe Payment Flow</h2>
+  <ol class="flow-list">
+    <li>User submits the checkout form with name, email, phone, and address.</li>
+    <li>Frontend creates an order by calling <code>POST /orders</code>.</li>
+    <li>OrderService stores the order as <code>PENDING</code>.</li>
+    <li>Frontend calls <code>POST /api/payments</code>.</li>
+    <li>PaymentService creates a Stripe Checkout Session.</li>
+    <li>PaymentService returns the Stripe Checkout URL.</li>
+    <li>Frontend opens Stripe Checkout for the user.</li>
+  </ol>
+
+  <pre>Checkout form
+  → POST /orders
+  → OrderService saves order as PENDING
+  → POST /api/payments
+  → PaymentService creates Stripe session
+  → Frontend opens Stripe payment page</pre>
+
+  <h2 class="page-break">8. Stripe Webhook And Order Confirmation Flow</h2>
+  <p>
+    This is the true payment confirmation path. Order creation and payment confirmation are intentionally separate. An order is created as <code>PENDING</code>. It becomes <code>CONFIRMED</code> only after Stripe sends a successful webhook event.
+  </p>
+
+  <ol class="flow-list">
+    <li>User completes payment on Stripe Checkout.</li>
+    <li>Stripe sends a webhook event to API Gateway at <code>/api/stripewebhook</code>.</li>
+    <li>Gateway routes the webhook to PaymentService.</li>
+    <li>PaymentService verifies the Stripe signature with <code>stripe.webhook.secret</code>.</li>
+    <li>PaymentService reads <code>orderId</code> from Stripe metadata.</li>
+    <li>PaymentService calls OrderService to update the order status to <code>CONFIRMED</code>.</li>
+    <li>OrderService updates MySQL and publishes a Kafka event.</li>
+    <li>EmailService consumes the event and sends the order confirmation email.</li>
+  </ol>
+
+  <pre>Stripe
+  → POST /api/stripewebhook
+  → PaymentService verifies event
+  → PUT /orders/{id}/status?status=CONFIRMED
+  → OrderService updates DB
+  → Kafka topic: OrderCreated
+  → EmailService sends confirmation email</pre>
+
+  <div class="warning callout">
+    Local webhook URL: <code>http://localhost:8088/api/stripewebhook</code>. Stripe cannot call localhost directly unless you use Stripe CLI or a tunnel such as ngrok. In cloud, configure Stripe with <code>https://your-api-gateway-domain/api/stripewebhook</code>.
+  </div>
+
+  <h2>9. Email And Kafka Flow</h2>
+  <p>
+    Kafka decouples user-facing actions from email sending. Signup and order confirmation both use Kafka topics, but they are triggered at different moments.
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>Topic</th><th>Producer</th><th>Consumer</th><th>When It Fires</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>Signup</code></td><td>UserAuthService</td><td>EmailService</td><td>After successful user signup</td></tr>
+      <tr><td><code>OrderCreated</code></td><td>OrderService</td><td>EmailService</td><td>After order status changes to <code>CONFIRMED</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Latest Order Email Behavior</h3>
+  <p>
+    The order email flow was adjusted so the confirmation email is sent only after payment is confirmed, not when the order is merely created. The frontend passes <code>customerEmail</code> during checkout. OrderService stores that email and includes it in the Kafka event. EmailService uses that email as the recipient.
+  </p>
+
+  <h2>10. Service Responsibilities</h2>
+  <table>
+    <thead>
+      <tr><th>Service</th><th>Main Responsibilities</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>API Gateway</td><td>Routes frontend and Stripe webhook traffic to backend services.</td></tr>
+      <tr><td>Service Discovery</td><td>Registers services and lets Gateway resolve service names.</td></tr>
+      <tr><td>UserAuthService</td><td>Handles signup/login and publishes signup email events.</td></tr>
+      <tr><td>ProductCatalogService</td><td>Manages product listing, detail, and search.</td></tr>
+      <tr><td>OrderService</td><td>Creates pending orders, updates statuses, publishes confirmed order email events.</td></tr>
+      <tr><td>PaymentService</td><td>Creates Stripe sessions and handles webhook events.</td></tr>
+      <tr><td>EmailService</td><td>Consumes Kafka email events and sends emails via Gmail SMTP.</td></tr>
+      <tr><td>Kafka</td><td>Message broker for async signup and order confirmation emails.</td></tr>
+      <tr><td>MySQL</td><td>Stores users, products, orders, and supporting service data.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="page-break">11. End-To-End User Journey</h2>
+  <pre>1. User opens http://localhost:3000
+2. User signs up
+3. UserAuthService creates account
+4. EmailService sends welcome email
+5. User browses products
+6. User adds products to cart
+7. User checks out
+8. OrderService creates a PENDING order
+9. PaymentService creates Stripe payment link
+10. User pays on Stripe
+11. Stripe calls /api/stripewebhook
+12. PaymentService marks order CONFIRMED through OrderService
+13. OrderService publishes Kafka order event
+14. EmailService sends order confirmation email</pre>
+
+  <h2>12. Cloud Deployment Notes</h2>
+  <ul>
+    <li>Frontend should use the deployed API Gateway URL instead of <code>localhost:8088</code>.</li>
+    <li>Stripe success and cancel URLs should use the deployed frontend domain instead of <code>localhost:3000</code>.</li>
+    <li>Stripe webhook endpoint should be configured as <code>https://your-api-gateway-domain/api/stripewebhook</code>.</li>
+    <li>The Stripe webhook signing secret must match the webhook endpoint configured in Stripe Dashboard.</li>
+    <li>Secrets such as Gmail app password, Stripe API key, and webhook secret should be environment variables in cloud.</li>
+  </ul>
+
+  <div class="callout">
+    In simple terms: the frontend is the storefront, API Gateway is the main backend entrance, Eureka is the service phonebook, MySQL stores business data, Kafka carries background email messages, EmailService sends mail, and Stripe confirms payment through the webhook.
+  </div>
+</body>
+</html>

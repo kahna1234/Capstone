@@ -1,0 +1,67 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: apigateway
+
+  cloud:
+    gateway:
+
+      # CORS CONFIG
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+      routes:
+        - id: userauthservice
+          uri: lb://userauthservice
+          predicates:
+            - Path=/auth/**, /users/**
+
+        - id: productcatalogservice
+          uri: lb://productcatalogservice
+          predicates:
+            - Path=/products/**, /search/**
+
+        - id: orderservice
+          uri: lb://orderservice
+          predicates:
+            - Path=/orders/**
+
+        - id: paymentservice
+          uri: lb://paymentservice
+          predicates:
+            - Path=/api/payments/**, /api/stripewebhook, /api/stripewebhook/**
+
+        - id: emailservice
+          uri: lb://emailservice
+          predicates:
+            - Path=/email/**
+
+  main:
+    allow-bean-definition-overriding: true
+
+# Eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+# JWT CONFIG
+jwt:
+  secret: "KJGST8237hsd87hsd87hSMN8723hjsd8723hjsd87"

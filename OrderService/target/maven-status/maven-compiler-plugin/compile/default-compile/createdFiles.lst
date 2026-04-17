@@ -1,0 +1,16 @@
+com\dev\ecommerce\orderservice\dtos\OrderDto.class
+com\dev\ecommerce\orderservice\clients\KafkaProducerClient.class
+com\dev\ecommerce\orderservice\config\SecurityConfig.class
+com\dev\ecommerce\orderservice\config\KafkaProducerConfig.class
+com\dev\ecommerce\orderservice\configs\KafkaProducerConfig.class
+com\dev\ecommerce\orderservice\controllers\GlobalExceptionHandler.class
+com\dev\ecommerce\orderservice\dtos\OrderItemDto.class
+com\dev\ecommerce\orderservice\controllers\OrderController.class
+com\dev\ecommerce\orderservice\entities\Order.class
+com\dev\ecommerce\orderservice\config\JacksonConfig.class
+com\dev\ecommerce\orderservice\services\OrderService.class
+com\dev\ecommerce\orderservice\repositories\OrderItemRepository.class
+com\dev\ecommerce\orderservice\entities\OrderItem.class
+com\dev\ecommerce\orderservice\services\OrderServiceInterface.class
+com\dev\ecommerce\orderservice\OrderServiceApplication.class
+com\dev\ecommerce\orderservice\repositories\OrderRepository.class

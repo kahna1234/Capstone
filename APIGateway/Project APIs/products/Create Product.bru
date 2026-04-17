@@ -1,0 +1,65 @@
+meta {
+  name: Create Product
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/products
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "",
+    "description": "",
+    "price": "",
+    "imageUrl": "",
+    "category": {
+      "id": 0,
+      "name": ""
+    }
+  }
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:8088
+}
+
+example {
+  name: 200 Response
+  description: OK
+  
+  request: {
+    url: {{baseUrl}}/products
+    method: POST
+    mode: json
+    body:json: {
+      {
+        "name": "",
+        "description": "",
+        "price": "",
+        "imageUrl": "",
+        "category": {
+          "id": 0,
+          "name": ""
+        }
+      }
+    }
+  }
+  
+  response: {
+    status: {
+      code: 200
+      text: OK
+    }
+  
+    body: {
+      type: text
+      content: '''
+  
+      '''
+    }
+  }
+}
