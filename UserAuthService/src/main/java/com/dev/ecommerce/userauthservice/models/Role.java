@@ -1,12 +1,8 @@
 package com.dev.ecommerce.userauthservice.models;
 
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 public class Role extends BaseModel{
     private String name; //Mentor, Instructor, Admin, TA
     /*
@@ -16,4 +12,12 @@ public class Role extends BaseModel{
 //    @ManyToMany(mappedBy = "roles")
 //    private List<User> users;
 
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

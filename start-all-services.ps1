@@ -51,6 +51,7 @@ if ($network -ne $networkName) {
 @(
     "api-gateway",
     "email-service",
+    "inventory-service",
     "order-service",
     "payment-service",
     "product-service",
@@ -82,6 +83,7 @@ $commonEurekaEnv = @(
 Write-Host "Starting application services..." -ForegroundColor Yellow
 podman run -d --name api-gateway --network $networkName -p 8088:8088 @commonEurekaEnv localhost/apigateway:latest | Out-Null
 podman run -d --name email-service --network $networkName -p 8081:8081 @commonEurekaEnv -e SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092 localhost/emailservice:latest | Out-Null
+podman run -d --name inventory-service --network $networkName -p 8086:8086 @commonEurekaEnv -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/inventoryservice -e SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092 localhost/inventoryservice:latest | Out-Null
 podman run -d --name user-auth-service --network $networkName -p 8082:8082 @commonEurekaEnv -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/user_auth_service -e SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092 localhost/userauthservice:latest | Out-Null
 podman run -d --name order-service --network $networkName -p 8083:8083 @commonEurekaEnv -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/orderservice -e SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092 localhost/orderservice:latest | Out-Null
 podman run -d --name product-service --network $networkName -p 8084:8084 @commonEurekaEnv -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/product_catalog_service -e SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092 localhost/productcatalogservice:latest | Out-Null

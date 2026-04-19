@@ -3,14 +3,10 @@ package com.dev.ecommerce.userauthservice.models;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
 public class Session extends BaseModel{
     @Column(columnDefinition = "TEXT")
     private String token;
@@ -19,6 +15,31 @@ public class Session extends BaseModel{
     private User user;
 
     private Date expiringAt;
+
+    // Getters and Setters
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Date getExpiringAt() {
+        return expiringAt;
+    }
+
+    public void setExpiringAt(Date expiringAt) {
+        this.expiringAt = expiringAt;
+    }
 }
 
 /*

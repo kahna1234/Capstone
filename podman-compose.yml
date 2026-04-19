@@ -42,26 +42,21 @@ services:
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
 
   service-discovery:
-    image: localhost/servicediscovery:latest
+    build: ./ServiceDiscovery
     container_name: service-discovery
     ports:
       - "8761:8761"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8761/"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   api-gateway:
-    image: localhost/apigateway:latest
+    build: ./APIGateway
     container_name: api-gateway
     ports:
       - "8088:8088"
     depends_on:
       service-discovery:
-        condition: service_healthy
+        condition: service_started
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
@@ -69,13 +64,13 @@ services:
       - "host.docker.internal:host-gateway"
 
   product-service:
-    image: localhost/productcatalogservice:latest
+    build: ./ProductCatalogService
     container_name: product-service
     ports:
       - "8084:8084"
     depends_on:
       service-discovery:
-        condition: service_healthy
+        condition: service_started
       mysql:
         condition: service_healthy
       kafka:
@@ -89,13 +84,13 @@ services:
       - "host.docker.internal:host-gateway"
 
   order-service:
-    image: localhost/orderservice:latest
+    build: ./OrderService
     container_name: order-service
     ports:
       - "8083:8083"
     depends_on:
       service-discovery:
-        condition: service_healthy
+        condition: service_started
       mysql:
         condition: service_healthy
       kafka:
@@ -109,13 +104,13 @@ services:
       - "host.docker.internal:host-gateway"
 
   payment-service:
-    image: localhost/paymentservice:latest
+    build: ./PaymentService
     container_name: payment-service
     ports:
       - "8085:8085"
     depends_on:
       service-discovery:
-        condition: service_healthy
+        condition: service_started
       mysql:
         condition: service_healthy
       kafka:
@@ -129,13 +124,13 @@ services:
       - "host.docker.internal:host-gateway"
 
   user-auth-service:
-    image: localhost/userauthservice:latest
+    build: ./UserAuthService
     container_name: user-auth-service
     ports:
       - "8082:8082"
     depends_on:
       service-discovery:
-        condition: service_healthy
+        condition: service_started
       mysql:
         condition: service_healthy
       kafka:
@@ -149,19 +144,66 @@ services:
       - "host.docker.internal:host-gateway"
 
   email-service:
-    image: localhost/emailservice:latest
+    build: ./EmailService
     container_name: email-service
     ports:
       - "8081:8081"
     depends_on:
       service-discovery:
-        condition: service_healthy
+        condition: service_started
       kafka:
         condition: service_started
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  inventory-service:
+    build: ./InventoryService
+    container_name: inventory-service
+    ports:
+      - "8086:8086"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/inventoryservice
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  cart-service:
+    build: ./CartService
+    container_name: cart-service
+    ports:
+      - "8087:8087"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/cartservice
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api-gateway
     extra_hosts:
       - "host.docker.internal:host-gateway"
 

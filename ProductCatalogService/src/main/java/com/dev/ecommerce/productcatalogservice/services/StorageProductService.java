@@ -1,6 +1,8 @@
 package com.dev.ecommerce.productcatalogservice.services;
 
 import com.dev.ecommerce.productcatalogservice.dtos.UserDTO;
+import com.dev.ecommerce.productcatalogservice.events.ProductCreatedEvent;
+import com.dev.ecommerce.productcatalogservice.kafka.ProductEventProducer;
 import com.dev.ecommerce.productcatalogservice.models.Product;
 import com.dev.ecommerce.productcatalogservice.models.State;
 import com.dev.ecommerce.productcatalogservice.repositories.ProductRepository;
@@ -20,22 +22,37 @@ public class StorageProductService implements IProductService{
     private ProductRepository productRepository;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private ProductEventProducer productEventProducer;
+
     public StorageProductService(ProductRepository productRepository){
         this.productRepository = productRepository;
     }
     @Override
     public Product getProductById(Long id) {
         Optional<Product> product = productRepository.findById(id);
-        if(product.isEmpty() || (State.INACTIVE).equals(product.get().getState())){
+        if(product.isEmpty()){
             return null;
-        } 
+        }
+        State productState = product.get().getState();
+        // Check if product is active (handle both enum and ordinal comparisons)
+        if(productState == null || 
+           (productState.equals(State.INACTIVE) || productState.ordinal() == 1)){
+            return null;
+        }
         return product.get();
     }
 
     @Override
     public List<Product> getAllProducts() {
         List<Product> products = productRepository.findAll();
-        return products.stream().filter(data -> (State.ACTIVE).equals(data.getState())).toList();
+        // Filter for active products - handle both enum and ordinal comparisons
+        return products.stream().filter(data -> {
+            State productState = data.getState();
+            return productState != null && 
+                   (productState.equals(State.ACTIVE) || 
+                    (productState.ordinal() == 0)); // State.ACTIVE has ordinal 0
+        }).toList();
     }
 
     @Override
@@ -56,7 +73,12 @@ public class StorageProductService implements IProductService{
         if(input.getState() == null){
             input.setState(State.ACTIVE);
         }
-        return productRepository.save(input);
+        Product saved = productRepository.save(input);
+        // Publish Kafka event so InventoryService creates an inventory record
+        productEventProducer.publishProductCreated(
+                new ProductCreatedEvent(saved.getId(), saved.getName(), saved.getInventoryQuantity())
+        );
+        return saved;
     }
 
     @Override

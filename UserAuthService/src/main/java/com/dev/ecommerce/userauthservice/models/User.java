@@ -3,14 +3,10 @@ package com.dev.ecommerce.userauthservice.models;
 import com.dev.ecommerce.userauthservice.dtos.UserDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 public class User extends BaseModel{
     private String email;
     private String password;
@@ -18,6 +14,39 @@ public class User extends BaseModel{
 
     @ManyToMany
     private List<Role> roles;
+
+    // Getters and Setters
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public UserDTO convertToUserDTO() {
         UserDTO userDto = new UserDTO();

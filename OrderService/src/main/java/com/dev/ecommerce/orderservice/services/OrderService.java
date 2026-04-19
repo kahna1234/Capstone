@@ -46,6 +46,9 @@ public class OrderService implements OrderServiceInterface {
         // Convert back to DTO
         orderDto.setId(savedOrder.getId());
 
+        // Note: Inventory reduction will happen when order status is updated to "CONFIRMED"
+        // This prevents double deduction during order creation and confirmation
+
         return orderDto;
     }
 

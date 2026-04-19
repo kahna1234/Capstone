@@ -143,7 +143,8 @@ public class AuthController {
                     .body(userToken.getUser().convertToUserDTO());
 
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            // Let the GlobalExceptionHandler handle specific exceptions
+            throw e;
         }
     }
 

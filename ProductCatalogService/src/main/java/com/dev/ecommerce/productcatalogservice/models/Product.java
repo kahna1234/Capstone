@@ -7,20 +7,67 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 public class Product extends BaseModel{
     private String name;
     private String description;
     private Double price;
     private String imageUrl;
+    private Integer inventoryQuantity = 0; // Denormalized copy; source of truth is InventoryService
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonManagedReference
     private Category category;
+    
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Integer getInventoryQuantity() {
+        return inventoryQuantity;
+    }
+
+    public void setInventoryQuantity(Integer inventoryQuantity) {
+        this.inventoryQuantity = inventoryQuantity;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+    
     public ProductDTO convert(){
         ProductDTO productDto = new ProductDTO();
         productDto.setId(this.getId());
@@ -28,6 +75,7 @@ public class Product extends BaseModel{
         productDto.setDescription(this.getDescription());
         productDto.setPrice(this.getPrice());
         productDto.setImageUrl(this.getImageUrl());
+        productDto.setInventoryQuantity(this.getInventoryQuantity());
         if(this.getCategory() != null) {
             CategoryDTO categoryDto = new CategoryDTO();
             categoryDto.setName(this.getCategory().getName());
@@ -37,6 +85,7 @@ public class Product extends BaseModel{
         }
         return productDto;
     }
+    
     public FakestoreProductDto convertToFakeStoreProduct(){
         FakestoreProductDto fakeStoreProductDto = new FakestoreProductDto();
         fakeStoreProductDto.setId(this.getId());
