@@ -1,0 +1,201 @@
+version: '3.9'
+
+services:
+
+  mysql:
+    image: docker.io/library/mysql:8.4
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  zookeeper:
+    image: docker.io/confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_TICK_TIME=2000
+
+  kafka:
+    image: docker.io/confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+
+  service-discovery:
+    image: localhost/servicediscovery:latest
+    container_name: service-discovery
+    ports:
+      - "8761:8761"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  api-gateway:
+    image: localhost/apigateway:latest
+    container_name: api-gateway
+    ports:
+      - "8088:8088"
+    depends_on:
+      service-discovery:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  product-service:
+    image: localhost/productcatalogservice:latest
+    container_name: product-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/product_catalog_service
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  order-service:
+    image: localhost/orderservice:latest
+    container_name: order-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/orderservice
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  payment-service:
+    image: localhost/paymentservice:latest
+    container_name: payment-service
+    ports:
+      - "8085:8085"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/paymentservice
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  user-auth-service:
+    image: localhost/userauthservice:latest
+    container_name: user-auth-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/user_auth_service
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  email-service:
+    image: localhost/emailservice:latest
+    container_name: email-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      kafka:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  inventory-service:
+    image: localhost/inventoryservice:latest
+    container_name: inventory-service
+    ports:
+      - "8086:8086"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/inventoryservice
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  cart-service:
+    image: localhost/cartservice:latest
+    container_name: cart-service
+    ports:
+      - "8087:8087"
+    depends_on:
+      service-discovery:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/cartservice
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  mysql-data:

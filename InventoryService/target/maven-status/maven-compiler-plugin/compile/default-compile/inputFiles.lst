@@ -1,0 +1,12 @@
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\config\JacksonConfig.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\config\KafkaConfig.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\controllers\InventoryController.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\dtos\InventoryDto.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\dtos\OrderDto.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\dtos\OrderItemDto.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\entities\Inventory.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\InventoryServiceApplication.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\kafka\InventoryEventProducer.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\kafka\InventoryKafkaConsumer.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\repositories\InventoryRepository.java
+D:\Capstone\InventoryService\src\main\java\com\dev\ecommerce\inventoryservice\services\InventoryService.java
