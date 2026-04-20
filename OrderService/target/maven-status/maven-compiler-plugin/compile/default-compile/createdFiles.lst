@@ -4,6 +4,7 @@ com\dev\ecommerce\orderservice\config\SecurityConfig.class
 com\dev\ecommerce\orderservice\config\KafkaProducerConfig.class
 com\dev\ecommerce\orderservice\configs\KafkaProducerConfig.class
 com\dev\ecommerce\orderservice\controllers\GlobalExceptionHandler.class
+com\dev\ecommerce\orderservice\config\WebConfig.class
 com\dev\ecommerce\orderservice\dtos\OrderItemDto.class
 com\dev\ecommerce\orderservice\controllers\OrderController.class
 com\dev\ecommerce\orderservice\entities\Order.class

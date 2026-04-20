@@ -2,3 +2,4 @@ com\dev\ecommerce\apigateway\config\SecurityConfig.class
 com\dev\ecommerce\apigateway\filters\GlobalErrorHandler.class
 com\dev\ecommerce\apigateway\filters\JwtAuthenticationFilter.class
 com\dev\ecommerce\apigateway\APIGatewayApplication.class
+com\dev\ecommerce\apigateway\filters\RateLimitFilter.class

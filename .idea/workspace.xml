@@ -1,20 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7447b23-8e50-480f-a821-6643c92e2c3b" name="Changes" comment="Container deployment and changes">
-      <change beforePath="$PROJECT_DIR$/.continue/rules/new-rule.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Capstone.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/COMPLETE_COMMANDS_SUMMARY.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORS_ANALYSIS.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PODMAN_SETUP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectArchitechture.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RUNNING_SERVICES_ON_DOCKER.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SERVICES_DOCKER_SUMMARY.md" beforeDir="false" />
+    <list default="true" id="c7447b23-8e50-480f-a821-6643c92e2c3b" name="Changes" comment="chanages update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/filters/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/filters/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/filters/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/filters/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/controllers/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/controllers/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/controllers/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/controllers/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/services/StripeWebhookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/services/StripeWebhookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaymentService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/dtos/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/dtos/ProductDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAuthService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UserAuthService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAuthService/src/main/java/com/dev/ecommerce/userauthservice/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserAuthService/src/main/java/com/dev/ecommerce/userauthservice/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAuthService/src/main/java/com/dev/ecommerce/userauthservice/dtos/LoginRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserAuthService/src/main/java/com/dev/ecommerce/userauthservice/dtos/LoginRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAuthService/src/main/java/com/dev/ecommerce/userauthservice/dtos/SignupRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserAuthService/src/main/java/com/dev/ecommerce/userauthservice/dtos/SignupRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserAuthService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/UserAuthService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build-and-run-podman.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/build-and-run-podman.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/mysql/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docker/mysql/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/api/authService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/api/authService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/components/navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/components/navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/pages/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/pages/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/utils/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/utils/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/utils/storage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/utils/storage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +85,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kahna1234/ECommerce.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/kahna1234/Capstone.git&quot;,
     &quot;accountId&quot;: &quot;c4907398-d094-4130-bc43-dc0165b490a2&quot;
   }
 }</component>
@@ -59,19 +98,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Capstone",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Capstone&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.codeium.AppSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Capstone" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Capstone" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -94,7 +148,8 @@
       <workItem from="1776358364490" duration="1213000" />
       <workItem from="1776438478131" duration="987000" />
       <workItem from="1776443453032" duration="10519000" />
-      <workItem from="1776530440244" duration="22470000" />
+      <workItem from="1776530440244" duration="22656000" />
+      <workItem from="1776698902262" duration="7030000" />
     </task>
     <task id="LOCAL-00001" summary="Capstone project for container deployement">
       <option name="closed" value="true" />
@@ -128,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776622057432</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="chanages update">
+      <option name="closed" value="true" />
+      <created>1776698829466</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1776698829466</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +211,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Capstone project for container deployement" />
     <MESSAGE value="Container deployment and changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Container deployment and changes" />
+    <MESSAGE value="chanages update" />
+    <option name="LAST_COMMIT_MESSAGE" value="chanages update" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

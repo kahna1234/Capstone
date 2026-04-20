@@ -5,6 +5,17 @@ spring:
   application:
     name: apigateway
 
+  data:
+    redis:
+      host: redis
+      port: 6379
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
   cloud:
     gateway:
 
@@ -27,7 +38,7 @@ spring:
 
       routes:
         - id: userauthservice
-          uri: lb://userauthservice
+          uri: lb://USERAUTHSERVICE
           predicates:
             - Path=/auth/**, /users/**
 
@@ -76,4 +87,4 @@ eureka:
 
 # JWT CONFIG
 jwt:
-  secret: "KJGST8237hsd87hsd87hSMN8723hjsd8723hjsd87"
+  secret: ${JWT_SECRET:KJGST8237hsd87hsd87hSMN8723hjsd8723hjsd87}

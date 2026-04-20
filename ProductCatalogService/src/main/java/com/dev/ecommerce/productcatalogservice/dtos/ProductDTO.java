@@ -2,14 +2,33 @@ package com.dev.ecommerce.productcatalogservice.dtos;
 
 import com.dev.ecommerce.productcatalogservice.models.Category;
 import com.dev.ecommerce.productcatalogservice.models.Product;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class ProductDTO {
     private Long id;
+
+    @NotBlank(message = "Product name is required")
+    @Size(min = 2, max = 200, message = "Product name must be between 2 and 200 characters")
     private String name;
+
+    @NotBlank(message = "Description is required")
+    @Size(max = 2000, message = "Description must not exceed 2000 characters")
     private String description;
+
     private CategoryDTO category;
+
+    @NotNull(message = "Price is required")
+    @DecimalMin(value = "0.01", message = "Price must be greater than 0")
     private Double price;
+
+    @Size(max = 500, message = "Image URL must not exceed 500 characters")
     private String imageUrl;
+
+    @Min(value = 0, message = "Inventory quantity must be 0 or greater")
     private Integer inventoryQuantity; // Initial quantity at product creation; 0 if not provided
     
     // Getters and Setters

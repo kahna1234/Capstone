@@ -6,7 +6,9 @@ import com.dev.ecommerce.userauthservice.dtos.ValidateTokenDto;
 import com.dev.ecommerce.userauthservice.models.User;
 import com.dev.ecommerce.userauthservice.pojos.UserToken;
 import com.dev.ecommerce.userauthservice.services.IAuthService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
+    
+    @Value("${cookie.secure:false}")
+    private boolean cookieSecure;
     /*
     bunch of APIs
     1. /signup
@@ -123,7 +128,7 @@ public class AuthController {
 //    }
 
     @PostMapping("/login")
-    ResponseEntity<UserDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+    ResponseEntity<UserDTO> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
         try {
             UserToken userToken = authService.login(
                     loginRequestDTO.getEmail(),
@@ -132,7 +137,7 @@ public class AuthController {
 
             ResponseCookie cookie = ResponseCookie.from("token", userToken.getToken())
                     .httpOnly(true)       // prevents JS access
-                    .secure(false)        // true in production (HTTPS)
+                    .secure(cookieSecure) // true in production (HTTPS)
                     .path("/")
                     .maxAge(60 * 60)      // 1 hour
                     .sameSite("Lax")      // CSRF protection
@@ -152,7 +157,7 @@ public class AuthController {
     public ResponseEntity<String> logout() {
         ResponseCookie cookie = ResponseCookie.from("token", "")
                 .httpOnly(true)
-                .secure(false) // true in production
+                .secure(cookieSecure) // true in production
                 .path("/")
                 .maxAge(0) // deletes the cookie
                 .sameSite("Lax")

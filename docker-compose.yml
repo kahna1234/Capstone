@@ -7,8 +7,11 @@ services:
     container_name: mysql
     ports:
       - "3307:3306"
+    env_file:
+      - .env
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
       - mysql-data:/var/lib/mysql
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
@@ -57,9 +60,14 @@ services:
     depends_on:
       service-discovery:
         condition: service_started
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
+      - JWT_SECRET=${JWT_SECRET}
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -95,6 +103,8 @@ services:
         condition: service_healthy
       kafka:
         condition: service_started
+    env_file:
+      - .env
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
@@ -115,11 +125,17 @@ services:
         condition: service_healthy
       kafka:
         condition: service_started
+    env_file:
+      - .env
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/paymentservice
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID}
+      - RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET}
+      - STRIPE_API_KEY=${STRIPE_API_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -135,11 +151,14 @@ services:
         condition: service_healthy
       kafka:
         condition: service_started
+    env_file:
+      - .env
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/user_auth_service
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - JWT_SECRET=${JWT_SECRET}
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -172,6 +191,8 @@ services:
         condition: service_healthy
       kafka:
         condition: service_started
+    env_file:
+      - .env
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
@@ -190,12 +211,25 @@ services:
         condition: service_started
       mysql:
         condition: service_healthy
+    env_file:
+      - .env
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/cartservice
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   mysql-data:

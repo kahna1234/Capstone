@@ -22,7 +22,7 @@ function Test-PodmanInstalled {
 function Build-Services {
     Write-Host "Building all services..." -ForegroundColor Cyan
     
-    $services = @("ServiceDiscovery", "APIGateway", "ProductCatalogService", "OrderService", "PaymentService", "UserAuthService", "EmailService")
+    $services = @("ServiceDiscovery", "APIGateway", "ProductCatalogService", "OrderService", "PaymentService", "UserAuthService", "EmailService", "CartService", "InventoryService")
     
     foreach ($service in $services) {
         Write-Host "Building $service..." -ForegroundColor Yellow
@@ -42,12 +42,13 @@ function Build-Services {
             
             # Build Docker image with Podman
             Write-Host "  Building Docker image for $service..." -ForegroundColor Gray
-            podman build -t localhost/${service.ToLower()}:latest .
+            $imageName = $service.ToLower().Replace("service", "")
+            podman build -t localhost/${imageName}:latest .
             
             if ($LASTEXITCODE -ne 0) {
                 Write-Host "  Failed to build Docker image for $service" -ForegroundColor Red
             } else {
-                Write-Host "  Successfully built $service" -ForegroundColor Green
+                Write-Host "  Successfully built $service as localhost/${imageName}:latest" -ForegroundColor Green
             }
             
             Set-Location ..
@@ -77,16 +78,9 @@ function Build-Services {
 function Start-Services {
     Write-Host "Starting services with Podman Compose..." -ForegroundColor Cyan
     
-    # Check if podman-compose is available
-    try {
-        podman-compose version | Out-Null
-        Write-Host "Using podman-compose..." -ForegroundColor Gray
-        podman-compose -f podman-compose.yml up -d
-    }
-    catch {
-        Write-Host "podman-compose not found, using podman compose..." -ForegroundColor Yellow
-        podman compose -f podman-compose.yml up -d
-    }
+    # Use docker-compose.yml with podman compose
+    Write-Host "Using podman compose with docker-compose.yml..." -ForegroundColor Gray
+    podman compose -f docker-compose.yml up -d
     
     if ($LASTEXITCODE -ne 0) {
         Write-Host "Failed to start services" -ForegroundColor Red

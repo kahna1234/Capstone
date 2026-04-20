@@ -54,8 +54,8 @@ public class StripeWebhookService implements IStripeWebhookService {
         try {
             logger.info("Handling payment succeeded for order: {}", orderId);
 
-            // Call OrderService to update status to CONFIRMED
-            String orderServiceUrl = "http://orderservice/orders/" + orderId + "/status?status=CONFIRMED";
+            // Call OrderService internal webhook endpoint to update status to CONFIRMED
+            String orderServiceUrl = "http://orderservice/orders/" + orderId + "/status/webhook?status=CONFIRMED";
             restTemplate.put(orderServiceUrl, null);
 
             logger.info("Order {} status updated to CONFIRMED", orderId);
@@ -70,8 +70,8 @@ public class StripeWebhookService implements IStripeWebhookService {
         try {
             logger.info("Handling payment failed for order: {}", orderId);
 
-            // Call OrderService to update status to FAILED
-            String orderServiceUrl = "http://orderservice/orders/" + orderId + "/status?status=FAILED";
+            // Call OrderService internal webhook endpoint to update status to FAILED
+            String orderServiceUrl = "http://orderservice/orders/" + orderId + "/status/webhook?status=FAILED";
             restTemplate.put(orderServiceUrl, null);
 
             logger.info("Order {} status updated to FAILED", orderId);
