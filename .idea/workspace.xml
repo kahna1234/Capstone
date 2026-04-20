@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c7447b23-8e50-480f-a821-6643c92e2c3b" name="Changes" comment="Container deployment and changes">
+      <change beforePath="$PROJECT_DIR$/.continue/rules/new-rule.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Capstone.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/COMPLETE_COMMANDS_SUMMARY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORS_ANALYSIS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PODMAN_SETUP.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectArchitechture.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RUNNING_SERVICES_ON_DOCKER.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SERVICES_DOCKER_SUMMARY.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_D:/Capstone" value="3CJN91DW1WTEZqFcccab78PyS9y" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedChatMode">
+    <option name="chatModeId" value="Ask" />
+  </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="agent-panel" value="Claude Haiku 4.5" />
+      <entry key="chat-panel" value="Claude Haiku 4.5" />
+    </selectedModels>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;kahna1234&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kahna1234/ECommerce.git&quot;,
+    &quot;accountId&quot;: &quot;c4907398-d094-4130-bc43-dc0165b490a2&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3CJN91DW1WTEZqFcccab78PyS9y" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Capstone",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c7447b23-8e50-480f-a821-6643c92e2c3b" name="Changes" comment="" />
+      <created>1776099558104</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1776099558104</updated>
+      <workItem from="1776099559254" duration="2265000" />
+      <workItem from="1776178329485" duration="4761000" />
+      <workItem from="1776183750553" duration="3099000" />
+      <workItem from="1776264246260" duration="5449000" />
+      <workItem from="1776358364490" duration="1213000" />
+      <workItem from="1776438478131" duration="987000" />
+      <workItem from="1776443453032" duration="10519000" />
+      <workItem from="1776530440244" duration="22470000" />
+    </task>
+    <task id="LOCAL-00001" summary="Capstone project for container deployement">
+      <option name="closed" value="true" />
+      <created>1776443950245</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1776443950249</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Capstone project for container deployement">
+      <option name="closed" value="true" />
+      <created>1776444161673</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1776444161673</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Container deployment and changes">
+      <option name="closed" value="true" />
+      <created>1776621999944</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1776621999944</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Container deployment and changes">
+      <option name="closed" value="true" />
+      <created>1776622057432</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1776622057432</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Capstone project for container deployement" />
+    <MESSAGE value="Container deployment and changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Container deployment and changes" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
