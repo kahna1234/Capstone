@@ -34,6 +34,18 @@ public class InventoryController {
         return ResponseEntity.ok(dto);
     }
 
+    /** GET /inventory/{productId}/check?quantity=X — check if sufficient inventory available */
+    @GetMapping("/{productId}/check")
+    public ResponseEntity<Map<String, Boolean>> checkInventoryAvailability(
+            @PathVariable Long productId,
+            @RequestParam Integer quantity) {
+        
+        InventoryDto dto = inventoryService.getInventoryByProductId(productId);
+        boolean available = dto != null && dto.getQuantity() >= quantity;
+        
+        return ResponseEntity.ok(Map.of("available", available));
+    }
+
     /**
      * PUT /inventory/{productId} — admin: manually set stock quantity
      * Request body: { "quantity": 50 }

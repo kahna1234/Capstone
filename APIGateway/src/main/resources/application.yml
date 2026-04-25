@@ -5,6 +5,9 @@ spring:
   application:
     name: apigateway
 
+  main:
+    allow-bean-definition-overriding: true
+
   data:
     redis:
       host: redis
@@ -19,7 +22,7 @@ spring:
   cloud:
     gateway:
 
-      # CORS CONFIG
+      # 🌍 GLOBAL CORS CONFIG
       globalcors:
         corsConfigurations:
           '[/**]':
@@ -27,6 +30,7 @@ spring:
               - "http://localhost:3000"
               - "http://frontend:3000"
               - "http://host.docker.internal:3000"
+              - "https://gavialoid-makeda-preobediently.ngrok-free.dev"
             allowedMethods:
               - GET
               - POST
@@ -37,45 +41,188 @@ spring:
             allowCredentials: true
 
       routes:
+
+        # 🔐 AUTH SERVICE (relaxed)
         - id: userauthservice
           uri: lb://USERAUTHSERVICE
           predicates:
             - Path=/auth/**, /users/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.replenishRate: 20
+                redis-rate-limiter.burstCapacity: 40
+            - name: CircuitBreaker
+              args:
+                name: authCircuit
+                fallbackUri: forward:/fallback/auth
+            - name: Retry
+              args:
+                retries: 2
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT
 
+        # 🛍 PRODUCT SERVICE
         - id: productcatalogservice
-          uri: lb://productcatalogservice
+          uri: lb://PRODUCTCATALOGSERVICE
           predicates:
             - Path=/products/**, /search/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: productCircuit
+                fallbackUri: forward:/fallback/products
+            - name: Retry
+              args:
+                retries: 2
+                statuses: BAD_GATEWAY, GATEWAY_TIMEOUT
 
+        # 📦 ORDER SERVICE
         - id: orderservice
-          uri: lb://orderservice
+          uri: lb://ORDERSERVICE
           predicates:
             - Path=/orders/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.replenishRate: 8
+                redis-rate-limiter.burstCapacity: 16
+            - name: CircuitBreaker
+              args:
+                name: orderCircuit
+                fallbackUri: forward:/fallback/orders
+            - name: Retry
+              args:
+                retries: 2
 
+        # 💳 PAYMENT SERVICE (STRICT)
         - id: paymentservice
-          uri: lb://paymentservice
+          uri: lb://PAYMENTSERVICE
           predicates:
-            - Path=/api/payments/**, /api/stripewebhook, /api/stripewebhook/**
+            - Path=/api/payments/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+            - name: CircuitBreaker
+              args:
+                name: paymentCircuit
+                fallbackUri: forward:/fallback/payments
+            - name: Retry
+              args:
+                retries: 1   # avoid duplicate payment risk
 
+        # 💳 STRIPE WEBHOOK (PUBLIC, NO RATE LIMIT)
+        - id: stripewebhook
+          uri: lb://PAYMENTSERVICE
+          predicates:
+            - Path=/api/stripewebhook, /api/stripewebhook/**
+
+        # 📧 EMAIL SERVICE
         - id: emailservice
-          uri: lb://emailservice
+          uri: lb://EMAILSERVICE
           predicates:
             - Path=/email/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+            - name: CircuitBreaker
+              args:
+                name: emailCircuit
+                fallbackUri: forward:/fallback/email
 
+        # 📦 INVENTORY SERVICE
         - id: inventoryservice
-          uri: lb://inventoryservice
+          uri: lb://INVENTORYSERVICE
           predicates:
             - Path=/inventory/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: inventoryCircuit
+                fallbackUri: forward:/fallback/inventory
 
+        # 🛒 CART SERVICE
         - id: cartservice
-          uri: lb://cartservice
+          uri: lb://CARTSERVICE
           predicates:
             - Path=/cart/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@userKeyResolver}"
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            - name: CircuitBreaker
+              args:
+                name: cartCircuit
+                fallbackUri: forward:/fallback/cart
 
-  main:
-    allow-bean-definition-overriding: true
+# 🔁 RESILIENCE4J CONFIG (FIXED)
+resilience4j:
+  circuitbreaker:
+    instances:
 
-# Eureka
+      authCircuit:
+        failureRateThreshold: 50
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 10s
+
+      productCircuit:
+        failureRateThreshold: 50
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        waitDurationInOpenState: 10s
+
+      orderCircuit:
+        failureRateThreshold: 50
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 10
+        waitDurationInOpenState: 10s
+
+      paymentCircuit:
+        failureRateThreshold: 30
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 20s
+
+      emailCircuit:
+        failureRateThreshold: 70
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 10s
+
+      inventoryCircuit:
+        failureRateThreshold: 50
+        slidingWindowSize: 15
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 10s
+
+      cartCircuit:
+        failureRateThreshold: 50
+        slidingWindowSize: 15
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 10s
+
+  retry:
+    instances:
+      default:
+        maxAttempts: 3
+        waitDuration: 500ms
+
+# 🌐 EUREKA
 eureka:
   client:
     register-with-eureka: true
@@ -85,6 +232,6 @@ eureka:
   instance:
     prefer-ip-address: true
 
-# JWT CONFIG
+# 🔐 JWT
 jwt:
-  secret: ${JWT_SECRET:KJGST8237hsd87hsd87hSMN8723hjsd8723hjsd87}
+  secret: ${JWT_SECRET:KJGST8237hsd87hsd87hSMN8723hjsd87}

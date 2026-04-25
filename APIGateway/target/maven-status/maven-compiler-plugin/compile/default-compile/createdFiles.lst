@@ -1,5 +1,9 @@
 com\dev\ecommerce\apigateway\config\SecurityConfig.class
-com\dev\ecommerce\apigateway\filters\GlobalErrorHandler.class
-com\dev\ecommerce\apigateway\filters\JwtAuthenticationFilter.class
+com\dev\ecommerce\apigateway\config\SecurityConstants.class
+com\dev\ecommerce\apigateway\controller\FallbackController.class
 com\dev\ecommerce\apigateway\APIGatewayApplication.class
-com\dev\ecommerce\apigateway\filters\RateLimitFilter.class
+com\dev\ecommerce\apigateway\security\JwtAuthenticationToken.class
+com\dev\ecommerce\apigateway\security\JwtSecurityContextRepository.class
+com\dev\ecommerce\apigateway\filters\GlobalErrorHandler.class
+com\dev\ecommerce\apigateway\config\RateLimiterConfig.class
+com\dev\ecommerce\apigateway\security\JwtAuthenticationManager.class

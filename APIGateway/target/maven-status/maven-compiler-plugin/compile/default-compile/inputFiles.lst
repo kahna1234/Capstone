@@ -1,5 +1,9 @@
 D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\APIGatewayApplication.java
+D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\config\RateLimiterConfig.java
 D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\config\SecurityConfig.java
+D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\config\SecurityConstants.java
+D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\controller\FallbackController.java
 D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\filters\GlobalErrorHandler.java
-D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\filters\JwtAuthenticationFilter.java
-D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\filters\RateLimitFilter.java
+D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\security\JwtAuthenticationManager.java
+D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\security\JwtAuthenticationToken.java
+D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\security\JwtSecurityContextRepository.java

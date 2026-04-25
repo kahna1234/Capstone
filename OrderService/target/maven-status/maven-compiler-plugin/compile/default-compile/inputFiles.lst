@@ -1,6 +1,8 @@
+D:\Capstone\OrderService\src\main\java\com\dev\ecommerce\orderservice\clients\InventoryServiceClient.java
 D:\Capstone\OrderService\src\main\java\com\dev\ecommerce\orderservice\clients\KafkaProducerClient.java
 D:\Capstone\OrderService\src\main\java\com\dev\ecommerce\orderservice\config\JacksonConfig.java
 D:\Capstone\OrderService\src\main\java\com\dev\ecommerce\orderservice\config\KafkaProducerConfig.java
+D:\Capstone\OrderService\src\main\java\com\dev\ecommerce\orderservice\config\RestTemplateConfig.java
 D:\Capstone\OrderService\src\main\java\com\dev\ecommerce\orderservice\config\SecurityConfig.java
 D:\Capstone\OrderService\src\main\java\com\dev\ecommerce\orderservice\config\WebConfig.java
 D:\Capstone\OrderService\src\main\java\com\dev\ecommerce\orderservice\configs\KafkaProducerConfig.java

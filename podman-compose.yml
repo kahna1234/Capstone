@@ -115,11 +115,17 @@ services:
         condition: service_healthy
       kafka:
         condition: service_started
+    env_file:
+      - .env
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/paymentservice
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID}
+      - RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET}
+      - STRIPE_API_KEY=${STRIPE_API_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
     extra_hosts:
       - "host.docker.internal:host-gateway"
 

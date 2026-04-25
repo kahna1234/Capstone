@@ -5,6 +5,7 @@ import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,6 +13,8 @@ public class Razorpay implements PaymentGateway{
     @Autowired
     private RazorpayClient razorypayClient;
 
+    @Value("${frontend.baseUrl}")
+    private String frontendBaseUrl;
 
     @Override
     public String generatePaymentLink(String orderId,
@@ -48,10 +51,16 @@ public class Razorpay implements PaymentGateway{
 
         paymentLinkRequest.put("notes",notes);
 
-        paymentLinkRequest.put("callback_url","https://www.scaler.com/");
+        paymentLinkRequest.put("callback_url", getFrontendUrl() + "/#payment-success?orderId=" + orderId);
         paymentLinkRequest.put("callback_method","get");
 
         PaymentLink payment = razorypayClient.paymentLink.create(paymentLinkRequest);
         return payment.get("short_url");
+    }
+
+    private String getFrontendUrl() {
+        return frontendBaseUrl.endsWith("/")
+                ? frontendBaseUrl.substring(0, frontendBaseUrl.length() - 1)
+                : frontendBaseUrl;
     }
 }

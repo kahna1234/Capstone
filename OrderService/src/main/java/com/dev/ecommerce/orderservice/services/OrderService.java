@@ -1,6 +1,7 @@
 package com.dev.ecommerce.orderservice.services;
 
 import com.dev.ecommerce.orderservice.clients.KafkaProducerClient;
+import com.dev.ecommerce.orderservice.clients.InventoryServiceClient;
 import com.dev.ecommerce.orderservice.dtos.OrderDto;
 import com.dev.ecommerce.orderservice.dtos.OrderItemDto;
 import com.dev.ecommerce.orderservice.entities.Order;
@@ -21,9 +22,16 @@ public class OrderService implements OrderServiceInterface {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private InventoryServiceClient inventoryServiceClient;
+
     public OrderDto createOrder(OrderDto orderDto) {
-        // Validate order (e.g., check product availability via ProductCatalogService)
-        // Process payment via PaymentService
+        // Check inventory availability before creating order
+        for (OrderItemDto item : orderDto.getItems()) {
+            if (!inventoryServiceClient.checkInventory(item.getProductId(), item.getQuantity())) {
+                throw new RuntimeException("Insufficient inventory for product ID: " + item.getProductId());
+            }
+        }
 
         // Convert DTO to Entity
         Order order = new Order();

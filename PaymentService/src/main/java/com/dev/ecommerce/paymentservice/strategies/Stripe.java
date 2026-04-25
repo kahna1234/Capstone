@@ -12,6 +12,9 @@ public class Stripe implements  PaymentGateway {
     @Value("${stripe.apiKey}")
     private String stripeAPIKey;
 
+    @Value("${frontend.baseUrl}")
+    private String frontendBaseUrl;
+
     @Override
     public String generatePaymentLink(String orderId,
                                       Long amount,
@@ -24,8 +27,8 @@ public class Stripe implements  PaymentGateway {
 
             com.stripe.param.checkout.SessionCreateParams params = com.stripe.param.checkout.SessionCreateParams.builder()
                     .setMode(com.stripe.param.checkout.SessionCreateParams.Mode.PAYMENT)
-                    .setSuccessUrl("http://localhost:3000/#/home?payment=success")
-                    .setCancelUrl("http://localhost:3000/#/cart")
+                    .setSuccessUrl(getFrontendUrl() + "/#payment-success?orderId=" + orderId)
+                    .setCancelUrl(getFrontendUrl() + "/#cart")
                     .addLineItem(
                             com.stripe.param.checkout.SessionCreateParams.LineItem.builder()
                                     .setQuantity(1L)
@@ -64,5 +67,11 @@ public class Stripe implements  PaymentGateway {
             e.printStackTrace();
             throw new RuntimeException("Failed to create checkout session: " + e.getMessage(), e);
         }
+    }
+
+    private String getFrontendUrl() {
+        return frontendBaseUrl.endsWith("/")
+                ? frontendBaseUrl.substring(0, frontendBaseUrl.length() - 1)
+                : frontendBaseUrl;
     }
 }

@@ -125,8 +125,8 @@ if (Start-Services) {
     
     Write-Host "`n=== Useful Commands ===" -ForegroundColor Cyan
     Write-Host "View logs: podman logs <container-name>" -ForegroundColor Gray
-    Write-Host "Stop all: podman-compose -f podman-compose.yml down" -ForegroundColor Gray
-    Write-Host "Restart: podman-compose -f podman-compose.yml restart" -ForegroundColor Gray
+    Write-Host "Stop all: podman compose -f docker-compose.yml down" -ForegroundColor Gray
+    Write-Host "Restart: podman compose -f docker-compose.yml restart" -ForegroundColor Gray
 } else {
     Write-Host "Failed to start services. Check the logs above." -ForegroundColor Red
 }

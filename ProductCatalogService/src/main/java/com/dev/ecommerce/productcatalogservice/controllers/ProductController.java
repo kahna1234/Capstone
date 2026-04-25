@@ -50,9 +50,6 @@ public class ProductController {
     @GetMapping()
     ResponseEntity<ProductDTO[]> getAllProducts(){
         List<Product> productList = productService.getAllProducts();
-        if(productList.isEmpty()){
-            throw new IllegalArgumentException("No Product Found");
-        }
         ProductDTO[] productDTOarr = productList.stream().map(Product::convert).toArray(ProductDTO[]::new);
         return new ResponseEntity<>(productDTOarr,HttpStatus.OK);
     }

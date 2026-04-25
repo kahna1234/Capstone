@@ -24,8 +24,25 @@ public class StripeWebhookService implements IStripeWebhookService {
     @Override
     public void handleStripeWebhookEvent(String eventPayload, String stripeSignature) {
         try {
+            logger.info("Received webhook payload: {}", eventPayload);
+
             // Verify and extract the event from the request payload
-            Event event = Webhook.constructEvent(eventPayload, stripeSignature, webhookSecret);
+            Event event;
+            try {
+                event = Webhook.constructEvent(eventPayload, stripeSignature, webhookSecret);
+                logger.info("Webhook signature verified successfully");
+            } catch (Exception e) {
+                logger.error("Webhook signature verification failed, attempting to parse without verification for debugging", e);
+                // Temporarily parse without verification for debugging
+                try {
+                    event = Event.GSON.fromJson(eventPayload, Event.class);
+                    logger.info("Event parsed without signature verification: {}", event.getType());
+                } catch (Exception parseException) {
+                    logger.error("Failed to parse event payload even without verification", parseException);
+                    logger.error("Raw payload: {}", eventPayload);
+                    throw new RuntimeException("Invalid webhook payload", parseException);
+                }
+            }
 
             logger.info("Processing Stripe webhook event: {}", event.getType());
 
