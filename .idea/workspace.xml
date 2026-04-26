@@ -1,62 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7447b23-8e50-480f-a821-6643c92e2c3b" name="Changes" comment="chanages update">
-      <change afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/config/RateLimiterConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/config/SecurityConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/controller/FallbackController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/security/JwtAuthenticationManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/security/JwtAuthenticationToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/security/JwtSecurityContextRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.template" beforeDir="false" afterPath="$PROJECT_DIR$/.env.template" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/filters/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/filters/GlobalErrorHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/filters/JwtAuthenticationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/java/com/dev/ecommerce/apigateway/filters/RateLimitFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/classes/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/filters/GlobalErrorHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/filters/GlobalErrorHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/filters/JwtAuthenticationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CartService/src/main/java/com/dev/ecommerce/cartservice/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/src/main/java/com/dev/ecommerce/cartservice/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CartService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CartService/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InventoryService/src/main/java/com/dev/ecommerce/inventoryservice/controllers/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/src/main/java/com/dev/ecommerce/inventoryservice/controllers/InventoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InventoryService/target/classes/com/dev/ecommerce/inventoryservice/controllers/InventoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/target/classes/com/dev/ecommerce/inventoryservice/controllers/InventoryController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/services/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/services/OrderService.java" afterDir="false" />
+    <list default="true" id="c7447b23-8e50-480f-a821-6643c92e2c3b" name="Changes" comment="chanages related to server side load balancer client side changes">
+      <change beforePath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/controllers/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/src/main/java/com/dev/ecommerce/orderservice/controllers/OrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/services/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/services/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrderService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/services/StripeWebhookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/services/StripeWebhookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/strategies/Razorpay.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/strategies/Razorpay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/strategies/Stripe.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/strategies/Stripe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaymentService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserAuthService/src/main/java/com/dev/ecommerce/userauthservice/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/UserAuthService/src/main/java/com/dev/ecommerce/userauthservice/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build-and-run-podman.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/build-and-run-podman.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/controllers/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/controllers/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/services/PaymentReconciliationScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaymentService/src/main/java/com/dev/ecommerce/paymentservice/services/PaymentReconciliationScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/services/InventoryReconciliationScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/services/InventoryReconciliationScheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/css/products.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/css/products.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/api/orderService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/api/orderService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/components/cartItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/components/cartItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/components/productCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/components/productCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/js/pages/checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/pages/checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/podman-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/podman-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start-all-services.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/start-all-services.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/css/order.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/css/order.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/conf.d/upstreams.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/conf.d/upstreams.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +108,7 @@
       <workItem from="1776443453032" duration="10519000" />
       <workItem from="1776530440244" duration="22656000" />
       <workItem from="1776698902262" duration="7030000" />
-      <workItem from="1777095387618" duration="7487000" />
+      <workItem from="1777095387618" duration="18618000" />
     </task>
     <task id="LOCAL-00001" summary="Capstone project for container deployement">
       <option name="closed" value="true" />
@@ -195,7 +150,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776698829466</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="chanages related to server side load balancer client side changes">
+      <option name="closed" value="true" />
+      <created>1777130598848</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1777130598848</updated>
+    </task>
+    <task id="LOCAL-00007" summary="chanages related to server side load balancer client side changes">
+      <option name="closed" value="true" />
+      <created>1777211607230</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1777211607230</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +187,8 @@
     <MESSAGE value="Capstone project for container deployement" />
     <MESSAGE value="Container deployment and changes" />
     <MESSAGE value="chanages update" />
-    <option name="LAST_COMMIT_MESSAGE" value="chanages update" />
+    <MESSAGE value="chanages related to server side load balancer client side changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="chanages related to server side load balancer client side changes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

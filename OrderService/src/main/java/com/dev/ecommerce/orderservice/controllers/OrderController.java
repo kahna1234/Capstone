@@ -88,5 +88,16 @@ public class OrderController {
         
         return ResponseEntity.ok(orderService.updateOrderStatus(id, status));
     }
+
+    // Internal endpoint for checking order status without authentication (for payment reconciliation)
+    @GetMapping("/{id}/status/webhook")
+    public ResponseEntity<?> getOrderStatusWebhook(@PathVariable Long id) {
+        OrderDto order = orderService.getOrder(id);
+        if (order == null) {
+            return ResponseEntity.notFound().build();
+        }
+        // Return only the status
+        return ResponseEntity.ok("{\"status\":\"" + order.getStatus() + "\"}");
+    }
 }
 

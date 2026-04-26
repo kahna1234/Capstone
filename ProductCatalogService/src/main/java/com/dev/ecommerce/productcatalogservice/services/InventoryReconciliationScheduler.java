@@ -3,6 +3,7 @@ package com.dev.ecommerce.productcatalogservice.services;
 import com.dev.ecommerce.productcatalogservice.dtos.InventorySnapshotDto;
 import com.dev.ecommerce.productcatalogservice.models.Product;
 import com.dev.ecommerce.productcatalogservice.repositories.ProductRepository;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,14 +27,24 @@ public class InventoryReconciliationScheduler {
     @Value("${inventory.reconciliation.enabled:true}")
     private boolean reconciliationEnabled;
 
+    @Value("${inventory.reconciliation.cron:0 */5 * * * *}")
+    private String cronExpression;
+
     public InventoryReconciliationScheduler(RestTemplate restTemplate, ProductRepository productRepository) {
         this.restTemplate = restTemplate;
         this.productRepository = productRepository;
     }
 
-    @Scheduled(cron = "${inventory.reconciliation.cron:0 */5 * * * *}")
+    @PostConstruct
+    public void init() {
+        logger.info("InventoryReconciliationScheduler initialized - Enabled: {}, Cron: '{}'", reconciliationEnabled, cronExpression);
+    }
+
+    @Scheduled(fixedDelay = 300000) // Every 5 minutes (300000 ms)
     public void reconcileInventoryQuantities() {
+        logger.info("Inventory reconciliation job triggered");
         if (!reconciliationEnabled) {
+            logger.debug("Inventory reconciliation is disabled");
             return;
         }
 
@@ -44,6 +55,7 @@ public class InventoryReconciliationScheduler {
             );
 
             if (snapshots == null || snapshots.length == 0) {
+                logger.debug("Inventory reconciliation completed - no inventory snapshots found");
                 return;
             }
 
@@ -74,6 +86,8 @@ public class InventoryReconciliationScheduler {
 
             if (repairedProducts > 0) {
                 logger.info("Inventory reconciliation repaired {} product inventory copies", repairedProducts);
+            } else {
+                logger.debug("Inventory reconciliation completed - no repairs needed");
             }
         } catch (Exception e) {
             logger.error("Inventory reconciliation job failed", e);
