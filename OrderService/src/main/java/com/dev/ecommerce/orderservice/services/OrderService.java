@@ -103,6 +103,10 @@ public class OrderService implements OrderServiceInterface {
     public OrderDto updateOrderStatus(Long orderId, String status) {
         Order order = orderRepository.findById(orderId).orElse(null);
         if (order != null) {
+            if (order.getStatus() != null && order.getStatus().equalsIgnoreCase(status)) {
+                return getOrder(orderId);
+            }
+
             order.setStatus(status);
             orderRepository.save(order);
             OrderDto updatedOrder = getOrder(orderId);
