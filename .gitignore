@@ -24,3 +24,11 @@ Thumbs.db
 # Documentation
 *.md
 TODAY_SUMMARY.md
+
+# Java/Build artifacts
+*.jar
+*.war
+*.ear
+target/
+build/
+dist/
