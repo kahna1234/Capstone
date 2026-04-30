@@ -26,9 +26,24 @@ export class AuthService {
             console.log('Signup response status:', response.status);
 
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Signup error:', errorText);
-                throw new Error(`Signup failed: ${response.status} ${errorText}`);
+                const errorData = await response.json().catch(() => ({}));
+                let errorMessage = `Signup failed: ${response.status}`;
+                
+                // Handle validation errors from @Valid annotations
+                if (response.status === 400) {
+                    if (errorData.errors && Array.isArray(errorData.errors)) {
+                        errorMessage = errorData.errors.join(', ');
+                    } else if (errorData.message) {
+                        errorMessage = errorData.message;
+                    } else if (errorData.error) {
+                        errorMessage = errorData.error;
+                    }
+                } else if (errorData.error) {
+                    errorMessage = errorData.error;
+                }
+                
+                console.error('Signup error:', errorMessage);
+                throw new Error(errorMessage);
             }
 
             const user = await response.json();
@@ -64,9 +79,24 @@ export class AuthService {
             console.log('Login response status:', response.status);
 
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Login error:', errorText);
-                throw new Error(`Login failed: ${response.status} ${errorText}`);
+                const errorData = await response.json().catch(() => ({}));
+                let errorMessage = `Login failed: ${response.status}`;
+                
+                // Handle validation errors from @Valid annotations
+                if (response.status === 400) {
+                    if (errorData.errors && Array.isArray(errorData.errors)) {
+                        errorMessage = errorData.errors.join(', ');
+                    } else if (errorData.message) {
+                        errorMessage = errorData.message;
+                    } else if (errorData.error) {
+                        errorMessage = errorData.error;
+                    }
+                } else if (errorData.error) {
+                    errorMessage = errorData.error;
+                }
+                
+                console.error('Login error:', errorMessage);
+                throw new Error(errorMessage);
             }
 
             const user = await response.json();

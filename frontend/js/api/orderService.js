@@ -8,11 +8,17 @@ import { StorageService } from '../utils/storage.js';
 export class OrderService {
     static async createOrder(orderData) {
         try {
+            const user = StorageService.getUser();
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+            if (user) {
+                headers['X-User-Id'] = user.id;
+            }
+
             const response = await fetch(`${API_CONFIG.ORDER_SERVICE}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify(orderData),
                 credentials: 'include'
             });
@@ -32,11 +38,17 @@ export class OrderService {
 
     static async getOrderById(orderId) {
         try {
+            const user = StorageService.getUser();
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+            if (user) {
+                headers['X-User-Id'] = user.id;
+            }
+
             const response = await fetch(`${API_CONFIG.ORDER_SERVICE}/${orderId}`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 credentials: 'include'
             });
 
@@ -56,12 +68,16 @@ export class OrderService {
     static async getUserOrders() {
         try {
             const user = StorageService.getUser();
+            const headers = {
+                'Content-Type': 'application/json',
+            };
+            if (user) {
+                headers['X-User-Id'] = user.id;
+            }
 
             const response = await fetch(`${API_CONFIG.ORDER_SERVICE}/users/${user.id}`, {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 credentials: 'include'
             });
 

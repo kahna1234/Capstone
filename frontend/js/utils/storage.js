@@ -74,7 +74,9 @@ export class StorageService {
     }
 
     static isLoggedIn() {
-        return !!this.getUser(); // token is HttpOnly cookie — check user object instead
+        const user = this.getUser();
+        console.log('[StorageService] isLoggedIn check:', !!user, user);
+        return !!user; // token is HttpOnly cookie — check user object instead
     }
 
     static logout() {

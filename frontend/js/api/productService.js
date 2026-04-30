@@ -19,7 +19,9 @@ export class ProductService {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to fetch products');
+                const errorData = await response.json().catch(() => ({}));
+                const errorMessage = errorData.error || 'Failed to fetch products';
+                throw new Error(errorMessage);
             }
 
             const products = await response.json();
@@ -45,7 +47,9 @@ export class ProductService {
             });
 
             if (!response.ok) {
-                throw new Error('Product not found');
+                const errorData = await response.json().catch(() => ({}));
+                const errorMessage = errorData.error || 'Product not found';
+                throw new Error(errorMessage);
             }
 
             const product = await response.json();

@@ -10,6 +10,7 @@ import { ProductsPage } from './pages/products.js';
 import { CartPage } from './pages/cart.js';
 import { CheckoutPage } from './pages/checkout.js';
 import { OrdersPage } from './pages/orders.js';
+import { PaymentSuccessPage } from './pages/paymentSuccess.js';
 
 class App {
     static currentRoute = ROUTES.HOME;
@@ -18,28 +19,33 @@ class App {
     static init() {
         Navbar.render();
         this.setupRouting();
-        this.navigate(ROUTES.HOME);
+        this.renderCurrentHash();
     }
 
     static setupRouting() {
         window.addEventListener('hashchange', () => {
-            const hash = window.location.hash || ROUTES.HOME;
-            const [route, ...params] = hash.split('?');
-            const queryParams = {};
-
-            params.forEach(param => {
-                const [key, value] = param.split('=');
-                queryParams[key] = decodeURIComponent(value);
-            });
-
-            this.navigate(route, queryParams);
+            this.renderCurrentHash();
         });
+    }
+
+    static renderCurrentHash() {
+        const hash = window.location.hash || ROUTES.HOME;
+        const [route, queryString = ''] = hash.split('?');
+        const queryParams = Object.fromEntries(new URLSearchParams(queryString));
+
+        this.navigate(route, queryParams);
     }
 
     static navigate(route, params = {}) {
         this.currentRoute = route;
         this.currentParams = params;
-        window.location.hash = route;
+        const currentRoute = (window.location.hash || '').split('?')[0];
+        if (currentRoute !== route) {
+            window.location.hash = route;
+        }
+
+        // Re-render navbar on every route change to update login state
+        Navbar.render();
 
         switch (route) {
             case ROUTES.HOME:
@@ -56,6 +62,9 @@ class App {
                 break;
             case ROUTES.ORDERS:
                 OrdersPage.render();
+                break;
+            case ROUTES.PAYMENT_SUCCESS:
+                PaymentSuccessPage.render(params.orderId || '');
                 break;
             case ROUTES.LOGIN:
                 AuthPage.renderLogin();

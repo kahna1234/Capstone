@@ -198,6 +198,16 @@ textarea {
     color: #0c5460;
 }
 
+.status-cancelled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-failed {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
 .order-items {
     margin-bottom: 1.5rem;
 }

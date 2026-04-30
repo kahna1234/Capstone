@@ -6,6 +6,8 @@ import { StorageService } from '../utils/storage.js';
 import { Helpers } from '../utils/helpers.js';
 import { Navbar } from './navbar.js';
 import { CartPage } from '../pages/cart.js';
+import { CartApiService } from '../api/cartService.js';
+import { AuthService } from '../api/authService.js';
 
 export class CartItem {
     static render(item) {
@@ -34,25 +36,45 @@ export class CartItem {
         const qtyInput = cartItem.querySelector('.qty-input');
         const removeBtn = cartItem.querySelector('.remove-btn');
 
-        decreaseBtn.addEventListener('click', () => {
+        decreaseBtn.addEventListener('click', async () => {
             const newQty = Math.max(1, item.quantity - 1);
-            StorageService.updateCartItem(item.id, newQty);
+            if (AuthService.isLoggedIn()) {
+                const user = StorageService.getUser();
+                await CartApiService.updateItem(user.id, item.cartItemId, newQty);
+            } else {
+                StorageService.updateCartItem(item.id, newQty);
+            }
             CartPage.render();
         });
 
-        increaseBtn.addEventListener('click', () => {
-            StorageService.updateCartItem(item.id, item.quantity + 1);
+        increaseBtn.addEventListener('click', async () => {
+            if (AuthService.isLoggedIn()) {
+                const user = StorageService.getUser();
+                await CartApiService.updateItem(user.id, item.cartItemId, item.quantity + 1);
+            } else {
+                StorageService.updateCartItem(item.id, item.quantity + 1);
+            }
             CartPage.render();
         });
 
-        qtyInput.addEventListener('change', () => {
+        qtyInput.addEventListener('change', async () => {
             const newQty = Math.max(1, parseInt(qtyInput.value) || 1);
-            StorageService.updateCartItem(item.id, newQty);
+            if (AuthService.isLoggedIn()) {
+                const user = StorageService.getUser();
+                await CartApiService.updateItem(user.id, item.cartItemId, newQty);
+            } else {
+                StorageService.updateCartItem(item.id, newQty);
+            }
             CartPage.render();
         });
 
-        removeBtn.addEventListener('click', () => {
-            StorageService.removeFromCart(item.id);
+        removeBtn.addEventListener('click', async () => {
+            if (AuthService.isLoggedIn()) {
+                const user = StorageService.getUser();
+                await CartApiService.removeItem(user.id, item.cartItemId);
+            } else {
+                StorageService.removeFromCart(item.id);
+            }
             Navbar.updateCartCount();
             CartPage.render();
             Helpers.showSuccess('Item removed from cart');

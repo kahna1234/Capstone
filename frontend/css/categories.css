@@ -1,0 +1,221 @@
+/* ============================================
+   CATEGORY STYLING - DROPDOWN LAYOUT
+   ============================================ */
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.products-header h2 {
+    font-size: 2rem;
+    color: #343a40;
+    margin: 0;
+}
+
+.category-dropdown {
+    position: relative;
+    min-width: 200px;
+}
+
+.category-dropdown-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    background: white;
+    color: #343a40;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.category-dropdown-btn:hover {
+    border-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.dropdown-text {
+    flex: 1;
+    text-align: left;
+}
+
+.dropdown-arrow {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.category-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.category-dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.category-dropdown-item {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.category-dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.category-dropdown-item.active {
+    background-color: #007bff;
+}
+
+.category-dropdown-item.active .category-dropdown-content {
+    color: white;
+}
+
+.category-dropdown-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #343a40;
+}
+
+.category-icon {
+    font-size: 1.2rem;
+    min-width: 1.5rem;
+    text-align: center;
+}
+
+.category-name {
+    font-weight: 600;
+    flex: 1;
+}
+
+.category-count {
+    background: rgba(0,0,0,0.1);
+    color: inherit;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 2rem;
+    text-align: center;
+}
+
+.category-dropdown-item.active .category-count {
+    background: rgba(255,255,255,0.2);
+}
+
+.category-section {
+    margin-bottom: 3rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.category-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #343a40;
+    margin: 0;
+}
+
+.product-count {
+    background: #e9ecef;
+    color: #6c757d;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.no-products {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6c757d;
+}
+
+.no-products p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .category-tabs {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .category-tab {
+        padding: 1rem;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .category-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .category-header h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-tabs {
+        margin-bottom: 1.5rem;
+    }
+    
+    .category-section {
+        margin-bottom: 2rem;
+    }
+}

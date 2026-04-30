@@ -45,7 +45,7 @@ export class AuthPage {
                     <form id="signup-form">
                         <div class="form-group">
                             <label for="signup-name">Full Name:</label>
-                            <input type="text" id="signup-name" required>
+                            <input type="text" id="signup-name" required minlength="2" maxlength="100">
                         </div>
                         <div class="form-group">
                             <label for="signup-email">Email:</label>
@@ -53,7 +53,8 @@ export class AuthPage {
                         </div>
                         <div class="form-group">
                             <label for="signup-password">Password:</label>
-                            <input type="password" id="signup-password" required>
+                            <input type="password" id="signup-password" required minlength="8">
+                            <small class="password-hint">Password must be at least 8 characters with uppercase, lowercase, and a digit</small>
                         </div>
                         <div class="form-group">
                             <label for="signup-confirm-password">Confirm Password:</label>
@@ -85,10 +86,12 @@ export class AuthPage {
         const result = await AuthService.login(email, password);
         if (result.success) {
             Helpers.showSuccess('Logged in successfully!');
+            // Sync cart from server after login
+            const { Navbar } = await import('../components/navbar.js');
+            await Navbar.syncCartFromServer();
+            // Render navbar to update login state
+            Navbar.render();
             App.navigate(ROUTES.HOME);
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
         } else {
             Helpers.showError(result.error || 'Login failed');
         }
@@ -109,9 +112,17 @@ export class AuthPage {
         const result = await AuthService.signup(name, email, password);
         if (result.success) {
             Helpers.showSuccess('Account created successfully!');
+            // Render navbar to update login state
+            const { Navbar } = await import('../components/navbar.js');
+            Navbar.render();
             window.location.hash = ROUTES.LOGIN;
         } else {
-            Helpers.showError(result.error || 'Signup failed');
+            // Display backend validation errors
+            if (result.error) {
+                Helpers.showError(result.error);
+            } else {
+                Helpers.showError('Signup failed. Please try again.');
+            }
         }
     }
 }

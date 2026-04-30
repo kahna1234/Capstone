@@ -3,6 +3,7 @@
 // ============================================
 
 import { StorageService } from '../utils/storage.js';
+import { CartApiService } from '../api/cartService.js';
 import { OrderService } from '../api/orderService.js';
 import { PaymentService } from '../api/paymentService.js';
 import { Validators } from '../utils/validators.js';
@@ -99,6 +100,11 @@ export class CheckoutPage {
     }
 
     static async handleCheckout() {
+        const submitButton = document.querySelector('#checkout-form button[type="submit"]');
+        if (submitButton?.disabled) {
+            return;
+        }
+
         const firstName = document.getElementById('first-name').value;
         const lastName = document.getElementById('last-name').value;
         const email = document.getElementById('email').value;
@@ -111,51 +117,78 @@ export class CheckoutPage {
             return;
         }
 
-        const cart = StorageService.getCart();
-        const user = StorageService.getUser();
-        
-        const orderData = {
-            userId: user.id,
-            customerEmail: email,
-            items: cart.map(item => ({
-                productId: item.id,
-                quantity: item.quantity,
-                price: item.price
-            })),
-            status: 'PENDING',
-            totalAmount: OrderService.calculateTotal(cart) * 1.18
-        };
-
-        const result = await OrderService.createOrder(orderData);
-        if (!result.success) {
-            Helpers.showError(result.error || 'Failed to create order');
-            return;
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Processing...';
         }
 
-        const order = result.order;
-        const total = OrderService.calculateTotal(cart) * 1.18;
+        const cart = StorageService.getCart();
+        const user = StorageService.getUser();
 
-        // Initiate payment
-        const paymentResult = await PaymentService.generatePaymentLink({
-            orderId: order.id,
-            amount: total,
-            phoneNumber: phone,
-            name: `${firstName} ${lastName}`,
-            email: email,
-            gateway: 'STRIPE'
-        });
+        try {
+            const orderData = {
+                userId: user.id,
+                customerEmail: email,
+                items: cart.map(item => ({
+                    productId: item.id,
+                    quantity: item.quantity,
+                    price: item.price
+                })),
+                status: 'PENDING',
+                totalAmount: OrderService.calculateTotal(cart) * 1.18
+            };
 
-        if (paymentResult.success) {
-            StorageService.clearCart();
-            Navbar.updateCartCount();
-            Helpers.showSuccess('Order created! Redirecting to payment...');
-            
-            setTimeout(() => {
-                PaymentService.openPaymentGateway(paymentResult.paymentLink);
-                window.location.hash = ROUTES.HOME;
-            }, 2000);
-        } else {
-            Helpers.showError(paymentResult.error || 'Payment failed');
+            const result = await OrderService.createOrder(orderData);
+            if (!result.success) {
+                Helpers.showError(result.error || 'Failed to create order');
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Place Order';
+                }
+                return;
+            }
+
+            const order = result.order;
+            const total = OrderService.calculateTotal(cart) * 1.18;
+
+            // Initiate payment
+            const paymentResult = await PaymentService.generatePaymentLink({
+                orderId: order.id,
+                amount: total,
+                phoneNumber: phone,
+                name: `${firstName} ${lastName}`,
+                email: email,
+                gateway: 'STRIPE'
+            });
+
+            if (paymentResult.success) {
+                // Clear localStorage cart
+                StorageService.clearCart();
+                Navbar.updateCartCount();
+                // Also clear server-side cart
+                const user = StorageService.getUser();
+                if (user && user.id) {
+                    await CartApiService.clearCart(user.id);
+                }
+                Helpers.showSuccess('Order created! Redirecting to payment...');
+
+                setTimeout(() => {
+                    PaymentService.openPaymentGateway(paymentResult.paymentLink);
+                    App.navigate(ROUTES.HOME);
+                }, 2000);
+            } else {
+                Helpers.showError(paymentResult.error || 'Payment failed');
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Place Order';
+                }
+            }
+        } catch (error) {
+            Helpers.showError(error.message || 'Checkout failed');
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Place Order';
+            }
         }
     }
 }

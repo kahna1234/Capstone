@@ -37,6 +37,7 @@
 }
 
 .product-image {
+    position: relative;
     width: 100%;
     height: 200px;
     overflow: hidden;
@@ -55,6 +56,30 @@
 
 .product-card:hover .product-image img {
     transform: scale(1.05);
+}
+
+.cart-quantity-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.55rem;
+    border-radius: 999px;
+    background: #28a745;
+    color: #fff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.cart-quantity-badge.visible {
+    display: inline-flex;
 }
 
 .product-info {
@@ -126,3 +151,105 @@
     }
 }
 
+/* ============================================
+   STOCK BADGE - Inventory display
+   ============================================ */
+.stock-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.stock-badge.in-stock {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.stock-badge.out-of-stock {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.add-to-cart-btn:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none !important;
+}
+
+.add-to-cart-btn:disabled:hover {
+    background-color: #adb5bd;
+    transform: none;
+}
+
+/* ============================================
+   PAGINATION CONTROLS
+   ============================================ */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 1rem 0;
+}
+
+.pagination-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #dee2e6;
+    background: white;
+    color: #343a40;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination-btn:disabled {
+    background: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    border-color: #dee2e6;
+}
+
+.pagination-btn.prev-btn,
+.pagination-btn.next-btn {
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .pagination-controls {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+    
+    .pagination-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .pagination-btn.prev-btn,
+    .pagination-btn.next-btn {
+        padding: 0.4rem 1rem;
+    }
+}

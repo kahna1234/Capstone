@@ -54,5 +54,37 @@ export class Helpers {
     static deepClone(obj) {
         return JSON.parse(JSON.stringify(obj));
     }
+
+    // Handle API errors with appropriate user messages
+    static async handleApiError(response) {
+        const status = response.status;
+        
+        switch (status) {
+            case 401:
+                this.showError('Session expired. Please login again.');
+                // Redirect to login after a short delay
+                setTimeout(() => {
+                    window.location.hash = '#login';
+                }, 2000);
+                throw new Error('Unauthorized');
+            case 403:
+                this.showError('Access denied. You don\'t have permission to perform this action.');
+                throw new Error('Forbidden');
+            case 429:
+                this.showError('Too many requests. Please try again later.');
+                throw new Error('Too Many Requests');
+            case 400:
+                const errorData = await response.json().catch(() => ({}));
+                if (errorData.errors && Array.isArray(errorData.errors)) {
+                    throw new Error(errorData.errors.join(', '));
+                }
+                throw new Error(errorData.message || errorData.error || 'Invalid request');
+            case 500:
+                this.showError('Server error. Please try again later.');
+                throw new Error('Internal Server Error');
+            default:
+                throw new Error(`Request failed: ${status}`);
+        }
+    }
 }
 
