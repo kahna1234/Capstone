@@ -3,6 +3,8 @@ package com.dev.ecommerce.apigateway.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 
 public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
 
+    private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationManager.class);
     private final SecretKey key;
 
     public JwtAuthenticationManager(String secret) {
@@ -48,6 +51,7 @@ public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
             );
 
         } catch (Exception e) {
+            log.error("JWT authentication failed: {}", e.getMessage());
             return Mono.empty();
         }
     }

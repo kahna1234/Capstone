@@ -1,6 +1,7 @@
 package com.dev.ecommerce.productcatalogservice.services;
 
 import com.dev.ecommerce.productcatalogservice.dtos.UserDTO;
+import com.dev.ecommerce.productcatalogservice.documents.ProductDocument;
 import com.dev.ecommerce.productcatalogservice.events.ProductCreatedEvent;
 import com.dev.ecommerce.productcatalogservice.kafka.ProductEventProducer;
 import com.dev.ecommerce.productcatalogservice.models.Product;
@@ -24,6 +25,8 @@ public class StorageProductService implements IProductService{
     private RestTemplate restTemplate;
     @Autowired
     private ProductEventProducer productEventProducer;
+    @Autowired
+    private ElasticsearchSearchService elasticsearchSearchService;
 
     public StorageProductService(ProductRepository productRepository){
         this.productRepository = productRepository;
@@ -78,6 +81,8 @@ public class StorageProductService implements IProductService{
         productEventProducer.publishProductCreated(
                 new ProductCreatedEvent(saved.getId(), saved.getName(), saved.getInventoryQuantity())
         );
+        // Save to Elasticsearch
+        saveToElastic(saved);
         return saved;
     }
 
@@ -142,5 +147,22 @@ public class StorageProductService implements IProductService{
 
 
         return null;
+    }
+
+    private void saveToElastic(Product product) {
+        try {
+            String brand = product.getCategory() != null ? product.getCategory().getName() : null;
+            ProductDocument productDocument = new ProductDocument(
+                    String.valueOf(product.getId()),
+                    product.getName(),
+                    product.getDescription(),
+                    brand,
+                    product.getPrice() != null ? product.getPrice() : 0.0
+            );
+            elasticsearchSearchService.saveToElastic(productDocument);
+        } catch (Exception e) {
+            // Log error but don't fail the main operation
+            System.err.println("Failed to save product to Elasticsearch: " + e.getMessage());
+        }
     }
 }

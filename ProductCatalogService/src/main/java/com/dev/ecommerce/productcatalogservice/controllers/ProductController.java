@@ -3,6 +3,9 @@ package com.dev.ecommerce.productcatalogservice.controllers;
 import com.dev.ecommerce.productcatalogservice.dtos.ProductDTO;
 import com.dev.ecommerce.productcatalogservice.models.Product;
 import com.dev.ecommerce.productcatalogservice.services.IProductService;
+import com.dev.ecommerce.productcatalogservice.services.ISearchService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,8 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
     IProductService productService;
+    @Autowired
+    ISearchService searchService;
 
 
     public ProductController(IProductService iProductService){
@@ -80,5 +85,12 @@ public class ProductController {
         System.out.println("Call reaching this api");
         Product product = productService.getProductBasedOnUserScope(productId, userId);
         return null;
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ProductDTO[]> searchProducts(@RequestParam String q) {
+        Page<Product> searchResults = searchService.searchProducts(q, 0, 20, null);
+        ProductDTO[] productDTOarr = searchResults.getContent().stream().map(Product::convert).toArray(ProductDTO[]::new);
+        return new ResponseEntity<>(productDTOarr, HttpStatus.OK);
     }
 }

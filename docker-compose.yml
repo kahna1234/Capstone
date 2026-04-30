@@ -6,32 +6,6 @@ networks:
 
 services:
 
-  nginx-lb:
-    image: localhost/ecommerce-nginx:latest
-    container_name: nginx-lb
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-      - "3000:80"
-      - "8080:8080"
-    depends_on:
-      - api-gateway
-      - frontend
-    networks:
-      - capstone-network
-    restart: unless-stopped
-
-  frontend:
-    image: localhost/frontend:latest
-    container_name: frontend
-    expose:
-      - "80"
-    networks:
-      - capstone-network
-    restart: unless-stopped
-
   mysql:
     image: docker.io/library/mysql:8.4
     container_name: mysql
@@ -80,6 +54,31 @@ services:
     networks:
       - capstone-network
 
+  elasticsearch:
+    image: docker.io/elastic/elasticsearch:8.14.3
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    networks:
+      - capstone-network
+
+  redis:
+    image: docker.io/redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - capstone-network
+
   service-discovery:
     image: localhost/servicediscovery:latest
     container_name: service-discovery
@@ -93,8 +92,8 @@ services:
   api-gateway:
     image: localhost/apigateway:latest
     container_name: api-gateway
-    expose:
-      - "8088"
+    ports:
+      - "8088:8088"
     depends_on:
       service-discovery:
         condition: service_started
@@ -106,6 +105,8 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - JWT_SECRET=${JWT_SECRET}
+      - CORS_ALLOWED_ORIGIN=${CORS_ALLOWED_ORIGIN}
+      - CORS_ALLOWED_ORIGIN_PATTERN=${CORS_ALLOWED_ORIGIN_PATTERN}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
@@ -114,8 +115,8 @@ services:
   product-service:
     image: localhost/productcatalogservice:latest
     container_name: product-service
-    expose:
-      - "8084"
+    ports:
+      - "8084:8084"
     depends_on:
       service-discovery:
         condition: service_started
@@ -123,11 +124,15 @@ services:
         condition: service_healthy
       kafka:
         condition: service_started
+      elasticsearch:
+        condition: service_started
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/product_catalog_service
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
@@ -151,7 +156,7 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/orderservice
-      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -176,7 +181,7 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/paymentservice
-      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID}
       - RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET}
@@ -206,7 +211,7 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/user_auth_service
-      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - JWT_SECRET=${JWT_SECRET}
     extra_hosts:
@@ -251,7 +256,7 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/inventoryservice
-      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -274,24 +279,47 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://service-discovery:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/cartservice
-      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
       - capstone-network
 
-  redis:
-    image: redis:7-alpine
-    container_name: redis
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: localhost/frontend:latest
+    container_name: frontend
     ports:
-      - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - "3000:80"
+    depends_on:
+      - api-gateway
     networks:
       - capstone-network
+    restart: unless-stopped
+
+  nginx-lb:
+    image: localhost/ecommerce-nginx:latest
+    container_name: nginx-lb
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+      - "8080:8080"
+    depends_on:
+      - api-gateway
+      - frontend
+    networks:
+      - capstone-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 3s
+      start_period: 5s
+      retries: 3
 
 volumes:
   mysql-data:

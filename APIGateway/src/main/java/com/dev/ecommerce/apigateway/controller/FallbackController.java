@@ -26,4 +26,9 @@ public class FallbackController {
     public Map<String, String> authFallback() {
         return Map.of("error", "Auth service unavailable");
     }
+
+    @RequestMapping("/inventory")
+    public Map<String, String> inventoryFallback() {
+        return Map.of("error", "Inventory service unavailable");
+    }
 }

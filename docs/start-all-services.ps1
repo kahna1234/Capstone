@@ -1,7 +1,7 @@
 #!/usr/bin/env pwsh
 
 $ErrorActionPreference = "Stop"
-$composeFile = Join-Path $PWD "docker-compose.yml"
+$composeFile = Join-Path $PWD "podman-compose.yml"
 $envFile = Join-Path $PWD ".env"
 
 function Test-PodmanInstalled {
@@ -44,8 +44,9 @@ Write-Host "  Service Discovery: http://localhost:8761"
 Write-Host "  API Gateway:       http://localhost:8088"
 Write-Host "  MySQL:             localhost:3307"
 Write-Host "  Kafka:             localhost:9092"
+Write-Host "  Elasticsearch:     http://localhost:9200"
 
 Write-Host "`nUseful commands:" -ForegroundColor Cyan
 Write-Host "  View payment logs: podman logs -f payment-service"
 Write-Host "  View frontend logs: podman logs -f frontend"
-Write-Host "  Stop stack:        podman compose -f docker-compose.yml down"
+Write-Host "  Stop stack:        podman compose -f podman-compose.yml down"

@@ -1,12 +1,14 @@
 com\dev\ecommerce\inventoryservice\entities\Inventory.class
 com\dev\ecommerce\inventoryservice\dtos\OrderDto.class
 com\dev\ecommerce\inventoryservice\repositories\InventoryRepository.class
+com\dev\ecommerce\inventoryservice\bootstrap\InventoryBootstrap.class
 com\dev\ecommerce\inventoryservice\kafka\InventoryKafkaConsumer.class
 com\dev\ecommerce\inventoryservice\services\InventoryService.class
 com\dev\ecommerce\inventoryservice\kafka\InventoryEventProducer.class
 com\dev\ecommerce\inventoryservice\config\KafkaConfig.class
 com\dev\ecommerce\inventoryservice\config\JacksonConfig.class
 com\dev\ecommerce\inventoryservice\InventoryServiceApplication.class
+com\dev\ecommerce\inventoryservice\bootstrap\InventoryBootstrap$ProductSnapshot.class
 com\dev\ecommerce\inventoryservice\dtos\OrderItemDto.class
 com\dev\ecommerce\inventoryservice\controllers\InventoryController.class
 com\dev\ecommerce\inventoryservice\dtos\InventoryDto.class

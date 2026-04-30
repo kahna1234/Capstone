@@ -12,10 +12,15 @@ import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.List;
 
 @Component
 @Order(-1)
 public class GlobalErrorHandler implements WebExceptionHandler {
+
+    private static final List<String> SAFE_CORS_ORIGIN_SUFFIXES = List.of(
+            ".ngrok-free.dev"
+    );
 
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
@@ -48,6 +53,7 @@ public class GlobalErrorHandler implements WebExceptionHandler {
         // ✅ Set response
         exchange.getResponse().setStatusCode(status);
         exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
+        addCorsHeadersIfApplicable(exchange);
 
         byte[] bytes = responseBody.getBytes(StandardCharsets.UTF_8);
 
@@ -55,5 +61,33 @@ public class GlobalErrorHandler implements WebExceptionHandler {
                 .writeWith(Mono.just(exchange.getResponse()
                         .bufferFactory()
                         .wrap(bytes)));
+    }
+
+    private void addCorsHeadersIfApplicable(ServerWebExchange exchange) {
+        String origin = exchange.getRequest().getHeaders().getOrigin();
+        if (origin == null || origin.isBlank()) {
+            return;
+        }
+
+        boolean allow =
+                origin.startsWith("http://localhost:") ||
+                origin.startsWith("https://localhost:") ||
+                SAFE_CORS_ORIGIN_SUFFIXES.stream().anyMatch(origin::endsWith);
+
+        if (!allow) {
+            return;
+        }
+
+        exchange.getResponse().getHeaders().set("Access-Control-Allow-Origin", origin);
+        exchange.getResponse().getHeaders().set("Vary", "Origin");
+        exchange.getResponse().getHeaders().set("Access-Control-Allow-Credentials", "true");
+        exchange.getResponse().getHeaders().set(
+                "Access-Control-Allow-Headers",
+                "Authorization, Content-Type, X-User-Id, X-User-Roles"
+        );
+        exchange.getResponse().getHeaders().set(
+                "Access-Control-Allow-Methods",
+                "GET, POST, PUT, DELETE, OPTIONS"
+        );
     }
 }

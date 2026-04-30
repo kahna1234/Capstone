@@ -9,11 +9,12 @@ public class SecurityConstants {
             "/auth/signup",
             "/auth/logout",
             "/api/stripewebhook",
+            "/api/stripewebhook/**",
             "/products/**",
             "/search/**",
-            "/orders",
-            "/orders/**",
             "/inventory/**",
-            "/cart/**"
+            "/orders/**",
+            "/cart/**",
+            "/email/**"
     );
 }

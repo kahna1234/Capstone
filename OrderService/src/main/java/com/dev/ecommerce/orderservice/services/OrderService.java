@@ -9,6 +9,7 @@ import com.dev.ecommerce.orderservice.entities.OrderItem;
 import com.dev.ecommerce.orderservice.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,7 +61,8 @@ public class OrderService implements OrderServiceInterface {
         return orderDto;
     }
 
-    public OrderDto getOrder(Long orderId) {
+    @Transactional
+public OrderDto getOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElse(null);
         if (order == null) return null;
 
@@ -80,7 +82,8 @@ public class OrderService implements OrderServiceInterface {
         return dto;
     }
 
-    public List<OrderDto> getUserOrders(Long userId) {
+    @Transactional
+public List<OrderDto> getUserOrders(Long userId) {
         List<Order> orders = orderRepository.findByUserId(userId);
         return orders.stream().map(order -> {
             OrderDto dto = new OrderDto();
