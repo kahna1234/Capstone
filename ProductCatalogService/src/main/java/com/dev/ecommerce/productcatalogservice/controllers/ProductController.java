@@ -93,4 +93,14 @@ public class ProductController {
         ProductDTO[] productDTOarr = searchResults.getContent().stream().map(Product::convert).toArray(ProductDTO[]::new);
         return new ResponseEntity<>(productDTOarr, HttpStatus.OK);
     }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<ProductDTO[]> getProductsByCategory(@PathVariable Long categoryId) {
+        if (categoryId < 1) {
+            throw new IllegalArgumentException("Invalid Category Id (zero or negative)");
+        }
+        List<Product> products = productService.getProductsByCategory(categoryId);
+        ProductDTO[] productDTOarr = products.stream().map(Product::convert).toArray(ProductDTO[]::new);
+        return new ResponseEntity<>(productDTOarr, HttpStatus.OK);
+    }
 }

@@ -25,4 +25,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     void delete(Product entity);
 
     Page<Product> findByNameContainingIgnoreCase(String name, Pageable pageable);
+    
+    List<Product> findByCategoryId(Long categoryId);
 }

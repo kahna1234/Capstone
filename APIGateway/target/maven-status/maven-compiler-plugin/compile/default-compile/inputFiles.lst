@@ -1,5 +1,6 @@
 D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\APIGatewayApplication.java
 D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\config\RateLimiterConfig.java
+D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\config\RouteConfig.java
 D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\config\SecurityConfig.java
 D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\config\SecurityConstants.java
 D:\Capstone\APIGateway\src\main\java\com\dev\ecommerce\apigateway\controller\FallbackController.java

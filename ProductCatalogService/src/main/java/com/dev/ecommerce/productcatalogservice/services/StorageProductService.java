@@ -149,6 +149,18 @@ public class StorageProductService implements IProductService{
         return null;
     }
 
+    @Override
+    public List<Product> getProductsByCategory(Long categoryId) {
+        List<Product> products = productRepository.findByCategoryId(categoryId);
+        // Filter for active products - handle both enum and ordinal comparisons
+        return products.stream().filter(data -> {
+            State productState = data.getState();
+            return productState != null && 
+                   (productState.equals(State.ACTIVE) || 
+                    (productState.ordinal() == 0)); // State.ACTIVE has ordinal 0
+        }).toList();
+    }
+
     private void saveToElastic(Product product) {
         try {
             String brand = product.getCategory() != null ? product.getCategory().getName() : null;

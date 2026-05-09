@@ -4,7 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7447b23-8e50-480f-a821-6643c92e2c3b" name="Changes" comment="Remove jar files" />
+    <list default="true" id="c7447b23-8e50-480f-a821-6643c92e2c3b" name="Changes" comment="Remove jar files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/APIGatewayApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/classes/com/dev/ecommerce/apigateway/APIGatewayApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/CartService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/CartServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/CartServiceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/controllers/CartController.class" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/controllers/CartController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/dtos/CartDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/dtos/CartDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/dtos/CartItemDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/dtos/CartItemDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/entities/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/entities/Cart.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/repositories/CartRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/repositories/CartRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/services/CartService.class" beforeDir="false" afterPath="$PROJECT_DIR$/CartService/target/classes/com/dev/ecommerce/cartservice/services/CartService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/InventoryService/target/InventoryService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/OrderService-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/OrderServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/OrderServiceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/clients/KafkaProducerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/clients/KafkaProducerClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/config/JacksonConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/config/JacksonConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/config/KafkaProducerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/config/KafkaProducerConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/configs/KafkaProducerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/configs/KafkaProducerConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/controllers/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/controllers/GlobalExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/dtos/OrderDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/dtos/OrderDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/dtos/OrderItemDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/dtos/OrderItemDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/entities/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/entities/Order.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/entities/OrderItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/entities/OrderItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/repositories/OrderItemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/repositories/OrderItemRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/repositories/OrderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/classes/com/dev/ecommerce/orderservice/repositories/OrderRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OrderService/target/test-classes/com/dev/ecommerce/orderservice/OrderServiceApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/OrderService/target/test-classes/com/dev/ecommerce/orderservice/OrderServiceApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/controllers/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/repositories/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/repositories/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/services/FakestoreProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/services/FakestoreProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/services/IProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/services/IProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/services/StorageProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProductCatalogService/src/main/java/com/dev/ecommerce/productcatalogservice/services/StorageProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/add-iphone-products.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/css/products.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/css/products.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/components/productCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/components/productCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/pages/checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/pages/checkout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/js/pages/products.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/js/pages/products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/podman-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/podman-compose.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +61,24 @@
   </component>
   <component name="CompilerWorkspaceConfiguration">
     <option name="COMPILER_PROCESS_HEAP_SIZE" value="4096" />
+  </component>
+  <component name="CopilotChats">
+    <option name="panelChat">
+      <chat>
+        <option name="activeSessionId" value="6b45d72e-5495-4574-bc51-2f871e52cf5d" />
+        <option name="sessions">
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="6b45d72e-5495-4574-bc51-2f871e52cf5d" />
+            <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+        </option>
+        <option name="type" value="PANEL" />
+      </chat>
+    </option>
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
@@ -29,6 +96,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -55,26 +123,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Capstone",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propCompiler",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Capstone&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Capstone\docs" />
@@ -124,6 +192,10 @@
       <workItem from="1777392187163" duration="56000" />
       <workItem from="1777392269303" duration="5041000" />
       <workItem from="1777473408202" duration="30365000" />
+      <workItem from="1778306328882" duration="119000" />
+      <workItem from="1778306483348" duration="2525000" />
+      <workItem from="1778309693683" duration="3171000" />
+      <workItem from="1778324377360" duration="4437000" />
     </task>
     <task id="LOCAL-00001" summary="Capstone project for container deployement">
       <option name="closed" value="true" />

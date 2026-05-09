@@ -1,3 +1,4 @@
+com\dev\ecommerce\apigateway\config\RouteConfig.class
 com\dev\ecommerce\apigateway\config\SecurityConfig.class
 com\dev\ecommerce\apigateway\config\SecurityConstants.class
 com\dev\ecommerce\apigateway\controller\FallbackController.class

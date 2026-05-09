@@ -13,9 +13,8 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
+      - "8090:80"
       - "8081:80"
-      - "3000:80"
-      - "8080:8080"
     depends_on:
       - api-gateway
       - frontend
@@ -26,6 +25,8 @@ services:
   frontend:
     image: localhost/frontend:latest
     container_name: frontend
+    ports:
+      - "3000:80"
     expose:
       - "80"
     networks:

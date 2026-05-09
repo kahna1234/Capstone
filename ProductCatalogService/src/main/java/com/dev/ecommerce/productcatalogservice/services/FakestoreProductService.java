@@ -63,4 +63,10 @@ public class FakestoreProductService implements IProductService{
     public Product getProductBasedOnUserScope(Long productId, Long userId) {
         return null;
     }
+
+    @Override
+    public List<Product> getProductsByCategory(Long categoryId) {
+        // FakeStore API doesn't support category filtering
+        return null;
+    }
 }
